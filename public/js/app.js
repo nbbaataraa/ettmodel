@@ -2039,14 +2039,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      valid: true,
-      name: "",
-      nameRules: [function (v) {
-        return !!v || "Талбарыг бѳгѳлнѳ үү.";
-      }, function (v) {
-        return v && v.length <= 25 || "25 үсэгнээс доош утга оруулна уу.";
-      }],
-      email: "",
+      form: {
+        email: null,
+        password: null
+      },
       emailRules: [function (v) {
         return !!v || "Талбарыг бѳгѳлнѳ үү.";
       }, function (v) {
@@ -2055,8 +2051,72 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    validate: function validate() {
-      this.$refs.form.validate();
+    login: function login() {
+      User.login(this.form);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewComponents/Signup.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewComponents/Signup.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      form: {
+        name: null,
+        email: null,
+        password: null,
+        password_confirmation: null
+      },
+      emailRules: [function (v) {
+        return !!v || "Талбарыг бѳгѳлнѳ үү.";
+      }, function (v) {
+        return /.+@.+/.test(v) || "Хүчин тѳгѳлдѳр Цахим хаяг оруулна уу.";
+      }],
+      errors: {}
+    };
+  },
+  methods: {
+    signup: function signup() {
+      var _this = this;
+
+      axios.post("/api/auth/signup", this.form).then(function (res) {
+        return User.responseAfterLogin(res);
+      })["catch"](function (error) {
+        return _this.errors = error.response.data.errors;
+      });
+      alert("Success!!!");
     }
   }
 });
@@ -2209,12 +2269,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -64289,60 +64343,178 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "v-container",
-    [
-      _c(
-        "v-form",
-        {
-          ref: "form",
-          attrs: { "lazy-validation": "" },
-          model: {
-            value: _vm.valid,
-            callback: function($$v) {
-              _vm.valid = $$v
-            },
-            expression: "valid"
+  return _c("v-container", [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.login($event)
           }
-        },
-        [
-          _c("v-text-field", {
-            attrs: {
-              rules: _vm.emailRules,
-              label: "Нэвтрэх нэр",
-              required: ""
+        }
+      },
+      [
+        _c("v-text-field", {
+          attrs: {
+            rules: _vm.emailRules,
+            label: "Цахим хаяг",
+            type: "text",
+            required: ""
+          },
+          model: {
+            value: _vm.form.email,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "email", $$v)
             },
-            model: {
-              value: _vm.email,
-              callback: function($$v) {
-                _vm.email = $$v
-              },
-              expression: "email"
-            }
-          }),
-          _vm._v(" "),
-          _c("v-text-field", {
-            attrs: { type: "password", label: "Нууц үг", required: "" },
-            model: {
-              value: _vm.password,
-              callback: function($$v) {
-                _vm.password = $$v
-              },
-              expression: "password"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { color: "success" }, on: { click: _vm.validate } },
-            [_vm._v("Нэвтрэх")]
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+            expression: "form.email"
+          }
+        }),
+        _vm._v(" "),
+        _c("v-text-field", {
+          attrs: { label: "Нууц үг", type: "password", required: "" },
+          model: {
+            value: _vm.form.password,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "password", $$v)
+            },
+            expression: "form.password"
+          }
+        }),
+        _vm._v(" "),
+        _c("v-btn", { attrs: { color: "success", type: "submit" } }, [
+          _vm._v("Нэвтрэх")
+        ]),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          { attrs: { to: "/signup" } },
+          [
+            _c("v-btn", { attrs: { color: "teal darken-3 white--text" } }, [
+              _vm._v("Бүртгүүлэх")
+            ])
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewComponents/Signup.vue?vue&type=template&id=bcc7fa5e&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewComponents/Signup.vue?vue&type=template&id=bcc7fa5e& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("v-container", [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.signup($event)
+          }
+        }
+      },
+      [
+        _c("v-text-field", {
+          attrs: { label: "Хэрэглэгчийн нэр", type: "text" },
+          model: {
+            value: _vm.form.name,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "name", $$v)
+            },
+            expression: "form.name"
+          }
+        }),
+        _vm._v(" "),
+        _vm.errors.name
+          ? _c("span", { staticClass: "red--text" }, [
+              _vm._v(_vm._s(_vm.errors.name[0]))
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("v-text-field", {
+          attrs: { rules: _vm.emailRules, label: "Цахим хаяг", type: "text" },
+          model: {
+            value: _vm.form.email,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "email", $$v)
+            },
+            expression: "form.email"
+          }
+        }),
+        _vm._v(" "),
+        _vm.errors.email
+          ? _c("span", { staticClass: "red--text" }, [
+              _vm._v(_vm._s(_vm.errors.email[0]))
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("v-text-field", {
+          attrs: { label: "Нууц үг", type: "password" },
+          model: {
+            value: _vm.form.password,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "password", $$v)
+            },
+            expression: "form.password"
+          }
+        }),
+        _vm._v(" "),
+        _vm.errors.password
+          ? _c("span", { staticClass: "red--text" }, [
+              _vm._v(_vm._s(_vm.errors.password[0]))
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("v-text-field", {
+          attrs: { label: "Нууц үг баталгаажуулах", type: "password" },
+          model: {
+            value: _vm.form.password_confirmation,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "password_confirmation", $$v)
+            },
+            expression: "form.password_confirmation"
+          }
+        }),
+        _vm._v(" "),
+        _c("v-btn", { attrs: { color: "success", type: "submit" } }, [
+          _vm._v("Бүртгэх")
+        ]),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          { attrs: { to: "/login" } },
+          [
+            _c("v-btn", { attrs: { color: "grey darken-3 white--text" } }, [
+              _vm._v("Нэвтрэх")
+            ])
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -64406,223 +64578,165 @@ var render = function() {
         "v-container",
         [
           _c(
-            "v-layout",
+            "v-flex",
+            { attrs: { "md-6": "" } },
             [
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.nameRules,
-                      counter: 20,
-                      label: "Ургын овог",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.familyname,
-                      callback: function($$v) {
-                        _vm.familyname = $$v
-                      },
-                      expression: "familyname"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.nameRules,
-                      counter: 20,
-                      label: "Эцгийн овог",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.firstname,
-                      callback: function($$v) {
-                        _vm.firstname = $$v
-                      },
-                      expression: "firstname"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.nameRules,
-                      counter: 20,
-                      label: "Нэр",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.lastname,
-                      callback: function($$v) {
-                        _vm.lastname = $$v
-                      },
-                      expression: "lastname"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.nameRules,
-                      counter: 20,
-                      label: "Нас",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.age,
-                      callback: function($$v) {
-                        _vm.age = $$v
-                      },
-                      expression: "age"
-                    }
-                  })
-                ],
-                1
-              )
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.nameRules,
+                  counter: 20,
+                  label: "Ургын овог",
+                  required: ""
+                },
+                model: {
+                  value: _vm.familyname,
+                  callback: function($$v) {
+                    _vm.familyname = $$v
+                  },
+                  expression: "familyname"
+                }
+              })
             ],
             1
           ),
           _vm._v(" "),
           _c(
-            "v-layout",
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.nameRules,
+                  counter: 20,
+                  label: "Эцгийн овог",
+                  required: ""
+                },
+                model: {
+                  value: _vm.firstname,
+                  callback: function($$v) {
+                    _vm.firstname = $$v
+                  },
+                  expression: "firstname"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.nameRules,
+                  counter: 20,
+                  label: "Нэр",
+                  required: ""
+                },
+                model: {
+                  value: _vm.lastname,
+                  callback: function($$v) {
+                    _vm.lastname = $$v
+                  },
+                  expression: "lastname"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.nameRules,
+                  counter: 20,
+                  label: "Нас",
+                  required: ""
+                },
+                model: {
+                  value: _vm.age,
+                  callback: function($$v) {
+                    _vm.age = $$v
+                  },
+                  expression: "age"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { sm6: "", "md-6": "" } },
             [
               _c(
-                "v-flex",
-                { attrs: { xs12: "", sm6: "", md4: "" } },
-                [
-                  _c(
-                    "v-menu",
+                "v-menu",
+                {
+                  attrs: {
+                    "close-on-content-click": false,
+                    "nudge-right": 60,
+                    lazy: "",
+                    transition: "scale-transition",
+                    "offset-y": "",
+                    "full-width": "",
+                    "min-width": "290px"
+                  },
+                  scopedSlots: _vm._u([
                     {
-                      attrs: {
-                        "close-on-content-click": false,
-                        "nudge-right": 40,
-                        lazy: "",
-                        transition: "scale-transition",
-                        "offset-y": "",
-                        "full-width": "",
-                        "min-width": "290px"
-                      },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "activator",
-                          fn: function(ref) {
-                            var on = ref.on
-                            return [
-                              _c(
-                                "v-text-field",
-                                _vm._g(
-                                  {
-                                    attrs: {
-                                      label: "Тѳрсѳн он сар ѳдѳр",
-                                      "prepend-icon": "event",
-                                      readonly: ""
-                                    },
-                                    model: {
-                                      value: _vm.date,
-                                      callback: function($$v) {
-                                        _vm.date = $$v
-                                      },
-                                      expression: "date"
-                                    }
+                      key: "activator",
+                      fn: function(ref) {
+                        var on = ref.on
+                        return [
+                          _c(
+                            "v-text-field",
+                            _vm._g(
+                              {
+                                attrs: {
+                                  label: "Тѳрсѳн он сар ѳдѳр",
+                                  "prepend-icon": "event",
+                                  readonly: ""
+                                },
+                                model: {
+                                  value: _vm.date,
+                                  callback: function($$v) {
+                                    _vm.date = $$v
                                   },
-                                  on
-                                )
-                              )
-                            ]
-                          }
-                        }
-                      ]),
-                      model: {
-                        value: _vm.bot1,
-                        callback: function($$v) {
-                          _vm.bot1 = $$v
-                        },
-                        expression: "bot1"
+                                  expression: "date"
+                                }
+                              },
+                              on
+                            )
+                          )
+                        ]
+                      }
+                    }
+                  ]),
+                  model: {
+                    value: _vm.bot1,
+                    callback: function($$v) {
+                      _vm.bot1 = $$v
+                    },
+                    expression: "bot1"
+                  }
+                },
+                [
+                  _vm._v(" "),
+                  _c("v-date-picker", {
+                    on: {
+                      input: function($event) {
+                        _vm.bot1 = false
                       }
                     },
-                    [
-                      _vm._v(" "),
-                      _c("v-date-picker", {
-                        on: {
-                          input: function($event) {
-                            _vm.bot1 = false
-                          }
-                        },
-                        model: {
-                          value: _vm.date,
-                          callback: function($$v) {
-                            _vm.date = $$v
-                          },
-                          expression: "date"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.textArea,
-                      counter: 50,
-                      label: "Тѳрсѳн газар",
-                      required: ""
-                    },
                     model: {
-                      value: _vm.employee_birth_place,
+                      value: _vm.date,
                       callback: function($$v) {
-                        _vm.employee_birth_place = $$v
+                        _vm.date = $$v
                       },
-                      expression: "employee_birth_place"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-textarea", {
-                    attrs: {
-                      rules: _vm.textArea1,
-                      counter: 100,
-                      label: "Гэрийн хаяг",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.employee_address,
-                      callback: function($$v) {
-                        _vm.employee_address = $$v
-                      },
-                      expression: "employee_address"
+                      expression: "date"
                     }
                   })
                 ],
@@ -64633,271 +64747,298 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "v-layout",
+            "v-flex",
+            { attrs: { "md-6": "" } },
             [
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-select", {
-                    attrs: {
-                      items: _vm.items,
-                      filled: "",
-                      label: "Яс үндэс",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.employee_nationality,
-                      callback: function($$v) {
-                        _vm.employee_nationality = $$v
-                      },
-                      expression: "employee_nationality"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.textArea,
-                      counter: 50,
-                      label: "Нийгмийн гарал",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.social_origin,
-                      callback: function($$v) {
-                        _vm.social_origin = $$v
-                      },
-                      expression: "social_origin"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-checkbox", {
-                    attrs: {
-                      label:
-                        "Цэрэгт явсан эсэх: " +
-                        _vm.employee_isSoldier.toString(),
-                      "false-value": "0",
-                      "true-value": "1"
-                    },
-                    model: {
-                      value: _vm.employee_isSoldier,
-                      callback: function($$v) {
-                        _vm.employee_isSoldier = $$v
-                      },
-                      expression: "employee_isSoldier"
-                    }
-                  })
-                ],
-                1
-              )
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.textArea,
+                  counter: 50,
+                  label: "Тѳрсѳн газар",
+                  required: ""
+                },
+                model: {
+                  value: _vm.employee_birth_place,
+                  callback: function($$v) {
+                    _vm.employee_birth_place = $$v
+                  },
+                  expression: "employee_birth_place"
+                }
+              })
             ],
             1
           ),
           _vm._v(" "),
           _c(
-            "v-layout",
+            "v-flex",
+            { attrs: { "md-6": "" } },
             [
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.textFields,
-                      counter: 8,
-                      label: "Нийгмийн даатгалын дугаар",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.employee_n_number,
-                      callback: function($$v) {
-                        _vm.employee_n_number = $$v
-                      },
-                      expression: "employee_n_number"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.textFields,
-                      counter: 8,
-                      label: "Эрүүл мэндийн даатгалын дугаар",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.employee_health_number,
-                      callback: function($$v) {
-                        _vm.employee_health_number = $$v
-                      },
-                      expression: "employee_health_number"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.textFields,
-                      counter: 8,
-                      label: "Жолооны үнэмлэхний дугаар",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.employee_drive_license,
-                      callback: function($$v) {
-                        _vm.employee_drive_license = $$v
-                      },
-                      expression: "employee_drive_license"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.textFields,
-                      counter: 8,
-                      label: "Уурхайн жолооны үнэмлэхний дугаар",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.employee_drive_license_mine,
-                      callback: function($$v) {
-                        _vm.employee_drive_license_mine = $$v
-                      },
-                      expression: "employee_drive_license_mine"
-                    }
-                  })
-                ],
-                1
-              )
+              _c("v-textarea", {
+                attrs: {
+                  rules: _vm.textArea1,
+                  counter: 100,
+                  label: "Гэрийн хаяг",
+                  required: ""
+                },
+                model: {
+                  value: _vm.employee_address,
+                  callback: function($$v) {
+                    _vm.employee_address = $$v
+                  },
+                  expression: "employee_address"
+                }
+              })
             ],
             1
           ),
           _vm._v(" "),
           _c(
-            "v-layout",
+            "v-flex",
+            { attrs: { "md-6": "" } },
             [
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.textFields,
-                      counter: 8,
-                      label: "Утасны дугар",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.employee_phone_num,
-                      callback: function($$v) {
-                        _vm.employee_phone_num = $$v
-                      },
-                      expression: "employee_phone_num"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.textFields,
-                      counter: 8,
-                      label: "Гэрийн утасны дугаар",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.employee_phone_num_home,
-                      callback: function($$v) {
-                        _vm.employee_phone_num_home = $$v
-                      },
-                      expression: "employee_phone_num_home"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.emailRules1,
-                      label: "Цахим хаяг",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.email1,
-                      callback: function($$v) {
-                        _vm.email1 = $$v
-                      },
-                      expression: "email1"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md4: "" } },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: _vm.emailRules2,
-                      label: "Цахим хаяг",
-                      required: ""
-                    },
-                    model: {
-                      value: _vm.email2,
-                      callback: function($$v) {
-                        _vm.email2 = $$v
-                      },
-                      expression: "email2"
-                    }
-                  })
-                ],
-                1
-              )
+              _c("v-select", {
+                attrs: {
+                  items: _vm.items,
+                  filled: "",
+                  label: "Яс үндэс",
+                  required: ""
+                },
+                model: {
+                  value: _vm.employee_nationality,
+                  callback: function($$v) {
+                    _vm.employee_nationality = $$v
+                  },
+                  expression: "employee_nationality"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.textArea,
+                  counter: 50,
+                  label: "Нийгмийн гарал",
+                  required: ""
+                },
+                model: {
+                  value: _vm.social_origin,
+                  callback: function($$v) {
+                    _vm.social_origin = $$v
+                  },
+                  expression: "social_origin"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-checkbox", {
+                attrs: {
+                  label:
+                    "Цэрэгт явсан эсэх: " + _vm.employee_isSoldier.toString(),
+                  "false-value": "0",
+                  "true-value": "1"
+                },
+                model: {
+                  value: _vm.employee_isSoldier,
+                  callback: function($$v) {
+                    _vm.employee_isSoldier = $$v
+                  },
+                  expression: "employee_isSoldier"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.textFields,
+                  counter: 8,
+                  label: "Нийгмийн даатгалын дугаар",
+                  required: ""
+                },
+                model: {
+                  value: _vm.employee_n_number,
+                  callback: function($$v) {
+                    _vm.employee_n_number = $$v
+                  },
+                  expression: "employee_n_number"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.textFields,
+                  counter: 8,
+                  label: "Эрүүл мэндийн даатгалын дугаар",
+                  required: ""
+                },
+                model: {
+                  value: _vm.employee_health_number,
+                  callback: function($$v) {
+                    _vm.employee_health_number = $$v
+                  },
+                  expression: "employee_health_number"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.textFields,
+                  counter: 8,
+                  label: "Жолооны үнэмлэхний дугаар",
+                  required: ""
+                },
+                model: {
+                  value: _vm.employee_drive_license,
+                  callback: function($$v) {
+                    _vm.employee_drive_license = $$v
+                  },
+                  expression: "employee_drive_license"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.textFields,
+                  counter: 8,
+                  label: "Уурхайн жолооны үнэмлэхний дугаар",
+                  required: ""
+                },
+                model: {
+                  value: _vm.employee_drive_license_mine,
+                  callback: function($$v) {
+                    _vm.employee_drive_license_mine = $$v
+                  },
+                  expression: "employee_drive_license_mine"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.textFields,
+                  counter: 8,
+                  label: "Утасны дугар",
+                  required: ""
+                },
+                model: {
+                  value: _vm.employee_phone_num,
+                  callback: function($$v) {
+                    _vm.employee_phone_num = $$v
+                  },
+                  expression: "employee_phone_num"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.textFields,
+                  counter: 8,
+                  label: "Гэрийн утасны дугаар",
+                  required: ""
+                },
+                model: {
+                  value: _vm.employee_phone_num_home,
+                  callback: function($$v) {
+                    _vm.employee_phone_num_home = $$v
+                  },
+                  expression: "employee_phone_num_home"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.emailRules1,
+                  label: "Цахим хаяг",
+                  required: ""
+                },
+                model: {
+                  value: _vm.email1,
+                  callback: function($$v) {
+                    _vm.email1 = $$v
+                  },
+                  expression: "email1"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { "md-6": "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  rules: _vm.emailRules2,
+                  label: "Цахим хаяг",
+                  required: ""
+                },
+                model: {
+                  value: _vm.email2,
+                  callback: function($$v) {
+                    _vm.email2 = $$v
+                  },
+                  expression: "email2"
+                }
+              })
             ],
             1
           )
@@ -123695,6 +123836,213 @@ exports.registerPainter = registerPainter;
 
 /***/ }),
 
+/***/ "./resources/js/Helpers/AppStorage.js":
+/*!********************************************!*\
+  !*** ./resources/js/Helpers/AppStorage.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var AppStorage =
+/*#__PURE__*/
+function () {
+  function AppStorage() {
+    _classCallCheck(this, AppStorage);
+  }
+
+  _createClass(AppStorage, [{
+    key: "storetoken",
+    value: function storetoken(token) {
+      localStorage.setItem("token", token);
+    }
+  }, {
+    key: "storeUser",
+    value: function storeUser(user) {
+      localStorage.setItem("user", user);
+    }
+  }, {
+    key: "store",
+    value: function store(user, token) {
+      this.storetoken(token);
+      this.storeUser(user);
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+    }
+  }, {
+    key: "getToken",
+    value: function getToken() {
+      return localStorage.getItem("token");
+    }
+  }, {
+    key: "getUser",
+    value: function getUser() {
+      return localStorage.getItem("user");
+    }
+  }]);
+
+  return AppStorage;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (AppStorage = new AppStorage());
+
+/***/ }),
+
+/***/ "./resources/js/Helpers/Token.js":
+/*!***************************************!*\
+  !*** ./resources/js/Helpers/Token.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Token =
+/*#__PURE__*/
+function () {
+  function Token() {
+    _classCallCheck(this, Token);
+  }
+
+  _createClass(Token, [{
+    key: "isValid",
+    value: function isValid(token) {
+      var payload = this.payload(token);
+
+      if (payload) {
+        return payload.iss == "http://localhost:8000/api/auth/login" || "http://localhost:8000/api/auth/signup" ? true : false;
+      }
+    }
+  }, {
+    key: "payload",
+    value: function payload(token) {
+      var payload = token.split(".")[1];
+      return this.decode(payload);
+    }
+  }, {
+    key: "decode",
+    value: function decode(payload) {
+      return JSON.parse(atob(payload));
+    }
+  }]);
+
+  return Token;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Token = new Token());
+
+/***/ }),
+
+/***/ "./resources/js/Helpers/User.js":
+/*!**************************************!*\
+  !*** ./resources/js/Helpers/User.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Token__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Token */ "./resources/js/Helpers/Token.js");
+/* harmony import */ var _AppStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppStorage */ "./resources/js/Helpers/AppStorage.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var User =
+/*#__PURE__*/
+function () {
+  function User() {
+    _classCallCheck(this, User);
+  }
+
+  _createClass(User, [{
+    key: "login",
+    value: function login(data) {
+      var _this = this;
+
+      axios.post("/api/auth/login", data).then(function (res) {
+        return _this.responseAfterLogin(res);
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
+    }
+  }, {
+    key: "responseAfterLogin",
+    value: function responseAfterLogin(res) {
+      var access_token = res.data.access_token;
+      var username = res.data.user;
+
+      if (_Token__WEBPACK_IMPORTED_MODULE_0__["default"].isValid(res.data.access_token)) {
+        _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].store(username, access_token);
+      }
+    }
+  }, {
+    key: "hasToken",
+    value: function hasToken() {
+      var storedToken = _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getToken();
+
+      if (storedToken) {
+        return _Token__WEBPACK_IMPORTED_MODULE_0__["default"].isValid(storedToken) ? true : false;
+      }
+
+      return false;
+    }
+  }, {
+    key: "loggedIn",
+    value: function loggedIn() {
+      return this.hasToken();
+    }
+  }, {
+    key: "logOut",
+    value: function logOut() {
+      _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].clear();
+    }
+  }, {
+    key: "id",
+    value: function id() {
+      if (this.loggedIn) {
+        var payload = _Token__WEBPACK_IMPORTED_MODULE_0__["default"].payload(_AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getToken());
+        return payload.sub;
+      }
+    }
+  }, {
+    key: "name",
+    value: function name() {
+      if (this.loggedIn) {
+        return _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].getUser();
+      }
+    }
+  }]);
+
+  return User;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (User = new User());
+
+/***/ }),
+
 /***/ "./resources/js/Router/router.js":
 /*!***************************************!*\
   !*** ./resources/js/Router/router.js ***!
@@ -123711,10 +124059,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ViewComponents_Login_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/ViewComponents/Login.vue */ "./resources/js/components/ViewComponents/Login.vue");
 /* harmony import */ var _components_ViewComponents_hr_Dashboard_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/ViewComponents/hr/Dashboard.vue */ "./resources/js/components/ViewComponents/hr/Dashboard.vue");
 /* harmony import */ var _components_ViewComponents_hr_UsersList_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/ViewComponents/hr/UsersList.vue */ "./resources/js/components/ViewComponents/hr/UsersList.vue");
+/* harmony import */ var _components_ViewComponents_Signup_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/ViewComponents/Signup.vue */ "./resources/js/components/ViewComponents/Signup.vue");
 
 
  //Calling Router Vue's
 
+
+ //Calling Router Vue's
 
  //Calling Router Vue's
 
@@ -123734,6 +124085,9 @@ var routes = [{
 }, {
   path: "/userlist",
   component: _components_ViewComponents_hr_UsersList_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+}, {
+  path: "/signup",
+  component: _components_ViewComponents_Signup_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
 } //{ path: "/dispatcher", component: App },
 //{ path: "/station", component: App }
 ]; //To Register and export Defaults
@@ -123762,6 +124116,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuetify__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vue_echarts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-echarts */ "./node_modules/vue-echarts/components/ECharts.vue");
 /* harmony import */ var _Router_router_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Router/router.js */ "./resources/js/Router/router.js");
+/* harmony import */ var _Helpers_User__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Helpers/User */ "./resources/js/Helpers/User.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); //Call Vutify
@@ -123772,6 +124127,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  //Register Routes
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a);
+
+window.User = _Helpers_User__WEBPACK_IMPORTED_MODULE_4__["default"]; // console.log(User.hasToken());
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("app", __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue")["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#app",
@@ -124082,6 +124440,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_13443240___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_template_id_13443240___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewComponents/Signup.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/ViewComponents/Signup.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Signup_vue_vue_type_template_id_bcc7fa5e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Signup.vue?vue&type=template&id=bcc7fa5e& */ "./resources/js/components/ViewComponents/Signup.vue?vue&type=template&id=bcc7fa5e&");
+/* harmony import */ var _Signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Signup.vue?vue&type=script&lang=js& */ "./resources/js/components/ViewComponents/Signup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Signup_vue_vue_type_template_id_bcc7fa5e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Signup_vue_vue_type_template_id_bcc7fa5e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ViewComponents/Signup.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewComponents/Signup.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/ViewComponents/Signup.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Signup.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewComponents/Signup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewComponents/Signup.vue?vue&type=template&id=bcc7fa5e&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/ViewComponents/Signup.vue?vue&type=template&id=bcc7fa5e& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Signup_vue_vue_type_template_id_bcc7fa5e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Signup.vue?vue&type=template&id=bcc7fa5e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewComponents/Signup.vue?vue&type=template&id=bcc7fa5e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Signup_vue_vue_type_template_id_bcc7fa5e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Signup_vue_vue_type_template_id_bcc7fa5e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
