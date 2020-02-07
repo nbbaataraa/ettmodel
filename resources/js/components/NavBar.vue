@@ -11,14 +11,15 @@
                     v-for="link in lin"
                     :key="link.text"
                     :to="link.route"
+                    v-if="link.show"
                 >
                     <v-list-tile-action>
                         <v-icon>{{ link.icon }}</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                        <v-list-tile-title class="white--text">
-                            {{ link.text }}
-                        </v-list-tile-title>
+                        <v-list-tile-title class="white--text">{{
+                            link.text
+                        }}</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
 
@@ -51,20 +52,23 @@
                             v-for="link in links"
                             :key="link.text"
                             :to="link.route"
+                            v-if="link.show"
                         >
                             <v-list-tile-action>
                                 <v-icon>{{ link.icon }}</v-icon>
                             </v-list-tile-action>
                             <v-list-tile-content>
-                                <v-list-tile-title class="white--text">
-                                    {{ link.text }}
-                                </v-list-tile-title>
+                                <v-list-tile-title class="white--text">{{
+                                    link.text
+                                }}</v-list-tile-title>
                             </v-list-tile-content>
                         </v-list-tile>
 
                         <!-- Скрипттэй холбох хэсэг тѳгсгѳл -->
                     </v-list-group>
                 </v-list-group>
+                <!-- Мэдээлэл технологийн дэд цэс үүн дээр v-for гүйлгэхдээ скриптийн датаг ѳѳрчлѳх хэрэгтэй -->
+
                 <!-- Туслах цэс нэмэх тѳгсгѳл -->
             </v-list>
         </v-navigation-drawer>
@@ -78,9 +82,14 @@
             <v-toolbar-title>Эрдэнэс Тавантолгой ХК</v-toolbar-title>
             <v-spacer></v-spacer>
             <div>
-                <router-link to="/login">
+                <router-link
+                    v-for="link in tools"
+                    :key="link.text"
+                    :to="link.to"
+                    v-if="link.show"
+                >
                     <v-btn icon>
-                        <v-icon>exit_to_app</v-icon>
+                        <v-icon>{{ link.icon }}</v-icon>
                     </v-btn>
                 </router-link>
             </div>
@@ -98,12 +107,14 @@ export default {
                 {
                     icon: "assignment_ind",
                     text: "Ажилтан бүртгэх",
-                    route: "/useradd"
+                    route: "/useradd",
+                    show: User.loggedIn()
                 },
                 {
                     icon: "add",
                     text: "Ажилтны жагсаалт",
-                    route: "/userlist"
+                    route: "/userlist",
+                    show: User.loggedIn()
                 }
 
                 // Роуте, icon, текст-үүдийг энд зарлаж ѳгнѳ.
@@ -122,7 +133,14 @@ export default {
                 {
                     icon: "dashboard",
                     text: "Хянах самбар",
-                    route: "/dashboard"
+                    route: "/dashboard",
+                    show: User.loggedIn()
+                },
+                {
+                    icon: "add",
+                    text: "Систем хэрэглэгч Бүртгэх",
+                    route: "/signup",
+                    show: User.loggedIn()
                 }
 
                 // Роуте, icon, текст-үүдийг энд зарлаж ѳгнѳ.
@@ -136,8 +154,27 @@ export default {
                 //   text: "Станц",
                 //   route: "/station"
                 // }
+            ],
+            tools: [
+                {
+                    text: "Нэвтрэх",
+                    to: "/login",
+                    icon: "exit_to_app",
+                    show: !User.loggedIn()
+                },
+                {
+                    text: "Нэвтрэх",
+                    to: "/logout",
+                    icon: "touch_app",
+                    show: User.loggedIn()
+                }
             ]
         };
+    },
+    created() {
+        EventBus.$on("logout", () => {
+            User.logOut();
+        });
     }
 };
 </script>

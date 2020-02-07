@@ -7,12 +7,14 @@ class User {
             .post("/api/auth/login", data)
             .then(res => this.responseAfterLogin(res))
             .catch(error => console.log(error.response.data));
+        // alert("Username of password incorrect");
     }
     responseAfterLogin(res) {
         const access_token = res.data.access_token;
         const username = res.data.user;
         if (Token.isValid(res.data.access_token)) {
             AppStorage.store(username, access_token);
+            window.location = "/dashboard";
         }
     }
 
@@ -29,6 +31,7 @@ class User {
 
     logOut() {
         AppStorage.clear();
+        window.location = "/dashboard";
     }
 
     id() {

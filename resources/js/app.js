@@ -14,6 +14,7 @@ import User from "./Helpers/User";
 
 window.User = User;
 // console.log(User.hasToken());
+window.EventBus = new Vue();
 
 Vue.component("app", require("./components/App.vue").default);
 const app = new Vue({
