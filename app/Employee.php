@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Model\Skill;
 
 class Employee extends Model
 {
@@ -43,5 +43,9 @@ class Employee extends Model
     public function status()
     {
         return $this->hasOne(Status::class);
+    }
+
+    public function skills(){
+        return $this->hasMany(Skill::class);
     }
 }

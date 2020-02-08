@@ -10,7 +10,6 @@ $factory->define(Employee::class, function (Faker $faker) {
         'family_name' => $faker->text(10),
         'fname' => $faker->text(10),
         'lname' => $faker->text(10),
-        'age' => $faker->randomDigit(2),
         'employee_reg_num' => $faker->text(8),
         'employee_BOT' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'employee_bith_place' => $faker->text(100),
