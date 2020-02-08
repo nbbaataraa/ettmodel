@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -21,6 +22,9 @@ class EmployeeController extends Controller
     public function index()
     {
         return Employee::get();
+    //    $mybirthDate = '1992-05-04';
+    //     $myage = Carbon::parse($mybirthDate)->age;
+    //     dd($myage); 
     }
 
     /**

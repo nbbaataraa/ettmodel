@@ -20,5 +20,6 @@ Vue.component("app", require("./components/App.vue").default);
 const app = new Vue({
     el: "#app",
     ECharts,
-    router //To Register App.JS
+    router, //To Register App.JS
+    data: { date: new Date().toISOString().substr(0, 10) }
 });

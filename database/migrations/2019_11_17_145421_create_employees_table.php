@@ -18,7 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->string('family_name');
             $table->string('fname');
             $table->string('lname');
-            $table->tinyInteger('age');
+            //$table->integer('employee_age');
             $table->string('employee_reg_num');
             $table->date('employee_BOT');
             $table->string('employee_bith_place');
