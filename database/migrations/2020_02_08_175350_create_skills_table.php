@@ -21,6 +21,7 @@ class CreateSkillsTable extends Migration
             $table->boolean('isLanguage');
             $table->boolean('isLanguageHaveExams');
             $table->boolean('isOthers');
+            $table->string('skill_name');
             $table->timestamps();
         });
     }

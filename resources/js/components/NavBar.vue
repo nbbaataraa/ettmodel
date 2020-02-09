@@ -135,7 +135,7 @@ export default {
           show: !User.loggedIn()
         },
         {
-          text: "Нэвтрэх",
+          text: "Гарах",
           to: "/logout",
           icon: "touch_app",
           show: User.loggedIn()

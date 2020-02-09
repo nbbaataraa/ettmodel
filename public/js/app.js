@@ -1999,7 +1999,7 @@ __webpack_require__.r(__webpack_exports__);
         icon: "exit_to_app",
         show: !User.loggedIn()
       }, {
-        text: "Нэвтрэх",
+        text: "Гарах",
         to: "/logout",
         icon: "touch_app",
         show: User.loggedIn()

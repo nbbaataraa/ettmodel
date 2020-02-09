@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 Route::apiResource('/employee', 'EmployeeController');
 Route::apiResource('/status', 'StatusController');
+Route::apiResource('/skill', 'SkillController');
 
 Route::group([
 

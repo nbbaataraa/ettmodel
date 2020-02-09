@@ -11,6 +11,7 @@ $factory->define(Skill::class, function (Faker $faker) {
         'isSoftware' =>$faker->boolean(true),
         'isLanguage' =>$faker->boolean(true),
         'isLanguageHaveExams' =>$faker->boolean(true),
-        'isOthers' =>$faker->boolean(false)
+        'isOthers' =>$faker->boolean(false),
+        'skill_name' =>$faker->text(10)
     ];
 });
