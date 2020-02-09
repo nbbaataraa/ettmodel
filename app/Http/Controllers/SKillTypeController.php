@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Skill_language_exam;
+use App\SKillType;
 use Illuminate\Http\Request;
 
-class SkillLanguageExamController extends Controller
+class SKillTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SkillLanguageExamController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Skill_language_exam  $skill_language_exam
+     * @param  \App\SKillType  $sKillType
      * @return \Illuminate\Http\Response
      */
-    public function show(Skill_language_exam $skill_language_exam)
+    public function show(SKillType $sKillType)
     {
         //
     }
@@ -52,10 +52,10 @@ class SkillLanguageExamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Skill_language_exam  $skill_language_exam
+     * @param  \App\SKillType  $sKillType
      * @return \Illuminate\Http\Response
      */
-    public function edit(Skill_language_exam $skill_language_exam)
+    public function edit(SKillType $sKillType)
     {
         //
     }
@@ -64,10 +64,10 @@ class SkillLanguageExamController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Skill_language_exam  $skill_language_exam
+     * @param  \App\SKillType  $sKillType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Skill_language_exam $skill_language_exam)
+    public function update(Request $request, SKillType $sKillType)
     {
         //
     }
@@ -75,10 +75,10 @@ class SkillLanguageExamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Skill_language_exam  $skill_language_exam
+     * @param  \App\SKillType  $sKillType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Skill_language_exam $skill_language_exam)
+    public function destroy(SKillType $sKillType)
     {
         //
     }
