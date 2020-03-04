@@ -15,9 +15,9 @@ class CreateSKillTypesTable extends Migration
     {
         Schema::create('skill_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('skills_id');
+            $table->bigInteger('skill_id');
             $table->string('skill_type_name');
-            $table->char('skill_level');
+            $table->char('skill_level')->nullable();
             $table->timestamps();
         });
     }

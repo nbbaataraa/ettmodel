@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Skill;
+use App\Model\SkillType;
 
 class Employee extends Model
 {
@@ -47,5 +48,10 @@ class Employee extends Model
 
     public function skills(){
         return $this->hasMany(Skill::class);
+    }
+    
+    //Эхлээд хандах Модел оо зарлаад дараа нь Аль Модел ашиглан холбогдохоо зарлана.
+    public function skilltypesRel(){
+        return $this->hasManyThrough(SkillType::class, Skill::class);
     }
 }

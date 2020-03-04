@@ -87,6 +87,18 @@ export default {
           text: "Ажилтны жагсаалт",
           route: "/userlist",
           show: User.loggedIn()
+        },
+        {
+          icon: "assignment",
+          text: "Ур чадвар",
+          route: "/skills",
+          show: User.loggedIn()
+        },
+        {
+          icon: "assignment",
+          text: "Ур чадвар List",
+          route: "/skillstypes",
+          show: User.loggedIn()
         }
 
         // Роуте, icon, текст-үүдийг энд зарлаж ѳгнѳ.

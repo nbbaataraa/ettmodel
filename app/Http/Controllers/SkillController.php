@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Skill;
 use Illuminate\Http\Request;
 use App\Employee;
+use App\Model\SkillType;
 class SkillController extends Controller
 {
     /**
@@ -14,11 +15,17 @@ class SkillController extends Controller
      */
     public function index()
     {
-        // $skill = Skill::find(5000);
-        // dd($skill->employee->id);
-        $employee = Employee::with('skills')->get();
-        return ($employee);
+                //Many To Many Relation хийж байгаа үед. 
+                // Эхлээд модел оо зарлаж дараа нь модел доторх relation уудаа цэгээр тусгаарлан хэвлэнэ.
+        // $employee = Employee::with('skills.skillTypes')->get();
+        // return $employee; 
+
+        //ManyToManyThrough Relation хийж байгаа үед. 
+        // Зѳвхѳн модел дээрээ зарласан FUNCTION-оо дуудна.
+        $employee = Employee::with('skilltypesRel')->get();
+        return $employee; 
     }
+    
 
     /**
      * Show the form for creating a new resource.
