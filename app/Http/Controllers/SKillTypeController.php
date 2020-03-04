@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\SKillType;
+use App\Model\SkillType;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class SKillTypeController extends Controller
+class SkillTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class SKillTypeController extends Controller
      */
     public function index()
     {
-        //
+        return SkillType::get();
     }
 
     /**
@@ -24,7 +25,7 @@ class SKillTypeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,27 +36,28 @@ class SKillTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        SkillType::create($request->all());
+        return Response('Stored', Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\SKillType  $sKillType
+     * @param  \App\Model\SkillType  $skilltype
      * @return \Illuminate\Http\Response
      */
-    public function show(SKillType $sKillType)
+    public function show(SkillType $skilltype)
     {
-        //
+        return $skilltype;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SKillType  $sKillType
+     * @param  \App\Model\SkillType  $skilltype
      * @return \Illuminate\Http\Response
      */
-    public function edit(SKillType $sKillType)
+    public function edit(SkillType $skilltype)
     {
         //
     }
@@ -64,22 +66,24 @@ class SKillTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SKillType  $sKillType
+     * @param  \App\Model\SkillType  $skilltype
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SKillType $sKillType)
+    public function update(Request $request, SkillType $skilltype)
     {
-        //
+        $skilltype->update($request->all());
+        return Response('Updated Skilltype', Response::HTTP_ACCEPTED);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SKillType  $sKillType
+     * @param  \App\Model\SkillType  $skilltype
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SKillType $sKillType)
+    public function destroy(SkillType $skilltype)
     {
-        //
+        $skilltype->delete();
+        return Response('Deleted', Response::HTTP_ACCEPTED);
     }
 }

@@ -2589,23 +2589,18 @@ __webpack_require__.r(__webpack_exports__);
     return {
       headers: [{
         text: "Овог",
-        value: "id",
+        value: "fname",
         align: "right",
         sortable: true
       }, {
         text: "Нэр",
-        value: "employee_id",
+        value: "lname",
         align: "right"
       }, {
         text: "Ур чадвар",
-        value: "skill_name",
+        value: "skill_type_name",
         align: "right"
-      }, // {
-      //   text: "Ур чадварын тѳрѳл",
-      //   value: "skill_type_name",
-      //   align: "right"
-      // },
-      {
+      }, {
         text: "Зэрэг,дэв",
         value: "skill_level",
         align: "right"
@@ -65726,19 +65721,6 @@ var render = function() {
                               }
                             },
                             [_vm._v("edit")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-icon",
-                            {
-                              attrs: { color: "red", small: "" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.deleteItem(props.item)
-                                }
-                              }
-                            },
-                            [_vm._v("delete")]
                           )
                         ],
                         1
@@ -65774,7 +65756,7 @@ var render = function() {
               ],
               null,
               false,
-              1309019444
+              1901052315
             )
           })
         : _vm._e()

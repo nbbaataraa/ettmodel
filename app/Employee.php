@@ -36,6 +36,7 @@ class Employee extends Model
                         'employee_shift',
                         'employee_live_location',
                         'employee_campus'];
+                        
     protected $casts = [
         'emoloyee_isSoldier' => 'boolean',
     ];

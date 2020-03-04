@@ -27,7 +27,7 @@
         <!-- Nested Data агуулж буй тохиолдолд Filters болон methods бичиж ѳгнѳ. -->
         <td class="text-xs-right">
           <v-icon color="primary" small class="mr-2" @click="editItem(props.item)">edit</v-icon>
-          <v-icon color="red" small @click="deleteItem(props.item)">delete</v-icon>
+          <!-- <v-icon color="red" small @click="deleteItem(props.item)">delete</v-icon> -->
         </td>
       </template>
       <template v-slot:no-results>
@@ -71,14 +71,9 @@ export default {
   data() {
     return {
       headers: [
-        { text: "Овог", value: "id", align: "right", sortable: true },
-        { text: "Нэр", value: "employee_id", align: "right" },
-        { text: "Ур чадвар", value: "skill_name", align: "right" },
-        // {
-        //   text: "Ур чадварын тѳрѳл",
-        //   value: "skill_type_name",
-        //   align: "right"
-        // },
+        { text: "Овог", value: "fname", align: "right", sortable: true },
+        { text: "Нэр", value: "lname", align: "right" },
+        { text: "Ур чадвар", value: "skill_type_name", align: "right" },
         { text: "Зэрэг,дэв", value: "skill_level", align: "right" },
         { text: "Үйлдэлүүд", value: "name", sortable: false, align: "right" }
       ],
