@@ -5,7 +5,7 @@ use App\Status;
 use App\User;
 use Illuminate\Database\Seeder;
 use App\Model\Skill;
-use App\Model\SkillType;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         
         factory(Skill::class, 300)->create();
 
-        factory(SkillType::class, 430)->create();
+        
         
     }
 }

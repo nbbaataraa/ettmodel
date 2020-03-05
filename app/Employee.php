@@ -51,8 +51,8 @@ class Employee extends Model
         return $this->hasMany(Skill::class);
     }
     
-    //Эхлээд хандах Модел оо зарлаад дараа нь Аль Модел ашиглан холбогдохоо зарлана.
-    public function skilltypesRel(){
-        return $this->hasManyThrough(SkillType::class, Skill::class);
-    }
+        //Эхлээд хандах Модел оо зарлаад дараа нь Аль Модел ашиглан холбогдохоо зарлана.
+    // public function skilltypesRel(){
+    //     return $this->hasManyThrough(SkillType::class, Skill::class);
+    // }
 }

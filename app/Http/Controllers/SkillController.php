@@ -15,14 +15,14 @@ class SkillController extends Controller
      */
     public function index()
     {
-                //Many To Many Relation хийж байгаа үед. 
-                // Эхлээд модел оо зарлаж дараа нь модел доторх relation уудаа цэгээр тусгаарлан хэвлэнэ.
+        //Many To Many Relation хийж байгаа үед. 
+        // Эхлээд модел оо зарлаж дараа нь модел доторх relation уудаа цэгээр тусгаарлан хэвлэнэ.
         // $employee = Employee::with('skills.skillTypes')->get();
         // return $employee; 
 
         //ManyToManyThrough Relation хийж байгаа үед. 
         // Зѳвхѳн модел дээрээ зарласан FUNCTION-оо дуудна.
-        $employee = Employee::with('skilltypesRel')->get();
+        $employee = Employee::with('skills')->get();
         return $employee; 
     }
     

@@ -4,14 +4,14 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Employee;
-use App\Model\SkillType;
+
 class Skill extends Model
 {
     public function employee(){
         return $this->belongsTo(Employee::class);
     }
 
-    public function skillTypes(){
-        return $this->belongsToMany(SkillType::class);
-    }
+    // public function skillTypes(){
+    //     return $this->belongsToMany(SkillType::class);
+    // }
 }
