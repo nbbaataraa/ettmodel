@@ -1,118 +1,62 @@
 <template>
-  <v-data-table :headers="headers" :items="desserts" class="elevation-1">
-    <template v-slot:items="props">
-      <td>{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.calories }}</td>
-      <td class="text-xs-right">{{ props.item.fat }}</td>
-      <td class="text-xs-right">{{ props.item.carbs }}</td>
-      <td class="text-xs-right">{{ props.item.protein }}</td>
-      <td class="text-xs-right">{{ props.item.iron }}</td>
-    </template>
-  </v-data-table>
-</template>
+  <form>
+    <v-flex xs12 sm6 md4>
+      <v-text-field v-model="editedItems.skill_type_name" label="Ур чадвар" required></v-text-field>
+    </v-flex>
 
+    <v-flex xs12 sm6 md4>
+      <v-select v-model="editedItems.skill_level" :items="items" filled label="Зэрэг, Дэв" required></v-select>
+    </v-flex>
+    <v-btn class="primary" @click="save">Хадгалах</v-btn>
+    <v-btn class="blue lighten-3 white--text" @click="clear">Цэвэрлэх</v-btn>
+  </form>
+</template>
 <script>
 export default {
-  data() {
-    return {
-      headers: [
-        {
-          text: "Dessert (100g serving)",
-          align: "left",
-          sortable: false,
-          value: "name"
-        },
-        { text: "Calories", value: "calories" },
-        { text: "Fat (g)", value: "fat" },
-        { text: "Carbs (g)", value: "carbs" },
-        { text: "Protein (g)", value: "protein" },
-        { text: "Iron (%)", value: "iron" }
-      ],
-      desserts: [
-        {
-          name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: "1%"
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: "1%"
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: "7%"
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: "8%"
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: "16%"
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: "0%"
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: "2%"
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: "45%"
-        },
-        {
-          name: "Donut",
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: "22%"
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: "6%"
-        }
-      ]
-    };
+  data: () => ({
+    items: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    editedIndex: -1,
+    editedItems: {
+      skill_type_name: "",
+      skill_level: ""
+    }
+  }),
+  // editItem(item) {
+  //   this.editedIndex = this.skill_types.indexOf(item);
+  //   this.editedItem = Object.assign({}, item);
+  //   this.dialog = true;
+  // },
+  methods: {
+    clear() {
+      this.editedItems.skill_type_name = "";
+      this.editedItems.skill_level = null;
+      // this.checkbox = false;
+    },
+    save() {
+      if (this.editedIndex > -1) {
+        axios
+          .put("/api/skilltype/" + this.editedItem.id, {
+            skill_type_name: this.editedItems.skill_type_name,
+            skill_level: this.editedItems.skill_level
+          })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => console.log(error.response.data));
+        Object.assign(this.employees[this.editedIndex], this.editedItem);
+      } else {
+        axios
+          .post("/api/skilltype", {
+            skill_type_name: this.editedItems.skill_type_name,
+            skill_level: this.editedItems.skill_level
+          })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => console.log(error.response.data));
+        // this.employees.push(this.editedItem);
+      }
+    }
   }
 };
 </script>
-<style>
-</style>

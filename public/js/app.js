@@ -2020,6 +2020,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2036,7 +2058,7 @@ __webpack_require__.r(__webpack_exports__);
         show: User.loggedIn()
       }, {
         icon: "assignment",
-        text: "Ур чадвар List",
+        text: "Ур чадвар нэмэх",
         route: "/skillstypes",
         show: User.loggedIn()
       } // Роуте, icon, текст-үүдийг энд зарлаж ѳгнѳ.
@@ -2409,99 +2431,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      headers: [{
-        text: "Dessert (100g serving)",
-        align: "left",
-        sortable: false,
-        value: "name"
-      }, {
-        text: "Calories",
-        value: "calories"
-      }, {
-        text: "Fat (g)",
-        value: "fat"
-      }, {
-        text: "Carbs (g)",
-        value: "carbs"
-      }, {
-        text: "Protein (g)",
-        value: "protein"
-      }, {
-        text: "Iron (%)",
-        value: "iron"
-      }],
-      desserts: [{
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0,
-        iron: "1%"
-      }, {
-        name: "Ice cream sandwich",
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3,
-        iron: "1%"
-      }, {
-        name: "Eclair",
-        calories: 262,
-        fat: 16.0,
-        carbs: 23,
-        protein: 6.0,
-        iron: "7%"
-      }, {
-        name: "Cupcake",
-        calories: 305,
-        fat: 3.7,
-        carbs: 67,
-        protein: 4.3,
-        iron: "8%"
-      }, {
-        name: "Gingerbread",
-        calories: 356,
-        fat: 16.0,
-        carbs: 49,
-        protein: 3.9,
-        iron: "16%"
-      }, {
-        name: "Jelly bean",
-        calories: 375,
-        fat: 0.0,
-        carbs: 94,
-        protein: 0.0,
-        iron: "0%"
-      }, {
-        name: "Lollipop",
-        calories: 392,
-        fat: 0.2,
-        carbs: 98,
-        protein: 0,
-        iron: "2%"
-      }, {
-        name: "Honeycomb",
-        calories: 408,
-        fat: 3.2,
-        carbs: 87,
-        protein: 6.5,
-        iron: "45%"
-      }, {
-        name: "Donut",
-        calories: 452,
-        fat: 25.0,
-        carbs: 51,
-        protein: 4.9,
-        iron: "22%"
-      }, {
-        name: "KitKat",
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        iron: "6%"
-      }]
+      items: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+      editedIndex: -1,
+      editedItems: {
+        skill_type_name: "",
+        skill_level: ""
+      }
     };
+  },
+  // editItem(item) {
+  //   this.editedIndex = this.skill_types.indexOf(item);
+  //   this.editedItem = Object.assign({}, item);
+  //   this.dialog = true;
+  // },
+  methods: {
+    clear: function clear() {
+      this.editedItems.skill_type_name = "";
+      this.editedItems.skill_level = null; // this.checkbox = false;
+    },
+    save: function save() {
+      if (this.editedIndex > -1) {
+        axios.put("/api/skilltype/" + this.editedItem.id, {
+          skill_type_name: this.editedItems.skill_type_name,
+          skill_level: this.editedItems.skill_level
+        }).then(function (response) {
+          console.log(response);
+        })["catch"](function (error) {
+          return console.log(error.response.data);
+        });
+        Object.assign(this.employees[this.editedIndex], this.editedItem);
+      } else {
+        axios.post("/api/skilltype", {
+          skill_type_name: this.editedItems.skill_type_name,
+          skill_level: this.editedItems.skill_level
+        }).then(function (response) {
+          console.log(response);
+        })["catch"](function (error) {
+          return console.log(error.response.data);
+        }); // this.employees.push(this.editedItem);
+      }
+    }
   }
 });
 
@@ -2516,6 +2485,61 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2610,15 +2634,43 @@ __webpack_require__.r(__webpack_exports__);
         sortable: false,
         align: "right"
       }],
+      dialog: false,
       skills: [],
       dataLoaded: false,
       search: "",
       editedIndex: -1,
-      editedItem: {}
+      editedItems: {
+        skill_type_name: "",
+        skill_level: ""
+      },
+      items: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     };
   },
   created: function created() {
     this.initialize();
+  },
+  filters: {
+    // <!-- Nested Data агуулж буй тохиолдолд бичих filters  -->
+    getSkill_level: function getSkill_level(skilltypes_rel) {
+      return skilltypes_rel.map(function (skilltypes_rel) {
+        return skilltypes_rel.skill_level;
+      });
+    },
+    getSkill_name: function getSkill_name(skilltypes_rel) {
+      return skilltypes_rel.map(function (skilltypes_rel) {
+        return skilltypes_rel.skill_type_name;
+      });
+    }
+  },
+  computed: {
+    formTitle: function formTitle() {
+      return this.editedIndex === -1 ? "Шинэ хэрэглэгч" : "Ур чадвар засварлах";
+    }
+  },
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
   },
   methods: {
     // <!-- Nested Data агуулж буй тохиолдолд бичих methods  -->
@@ -2650,46 +2702,53 @@ __webpack_require__.r(__webpack_exports__);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-    deleteItem: function deleteItem(item) {
-      var index = this.skills.indexOf(item);
-      confirm("Та тухайн ѳгѳгдѳл устгахдаа итгэлтэй байна уу?") && this.skills.splice(index, 1);
-      axios["delete"]("//" + item.id).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {
-        return console.log(error.response.data);
-      });
+    // deleteItem(item) {
+    //   const index = this.skills.indexOf(item);
+    //   confirm("Та тухайн ѳгѳгдѳл устгахдаа итгэлтэй байна уу?") &&
+    //     this.skills.splice(index, 1);
+    //   axios
+    //     .delete("//" + item.id)
+    //     .then(response => {
+    //       console.log(response);
+    //     })
+    //     .catch(error => console.log(error.response.data));
+    // },
+    close: function close() {
+      var _this2 = this;
+
+      this.dialog = false;
+      setTimeout(function () {
+        _this2.editedItem = Object.assign({}, _this2.defaultItem);
+        _this2.editedIndex = -1;
+      }, 300);
     },
     save: function save() {
+      var _this3 = this;
+
       if (this.editedIndex > -1) {
-        axios.put("/api//" + this.editedItem.id, {}).then(function (response) {
+        axios.put("/api/skilltype/" + this.editedItem.id, {}).then(function (response) {
+          _this3.skills = response.data.map(function (skills) {
+            return {
+              id: skills.id,
+              skill_type_name: skilltypes_rel.attributes.skill_type_name,
+              skill_level: skilltypes_rel.attributes.skill_level
+            };
+          });
           console.log(response);
         })["catch"](function (error) {
           return console.log(error.response.data);
         });
-        Object.assign(this.skills[this.editedIndex], this.editedItem);
-      } else {
-        axios.post("/api/employee", {}).then(function (response) {
-          console.log(response);
-        })["catch"](function (error) {
-          return console.log(error.response.data);
-        });
-        this.skills.push(this.editedItem);
+        Object.assign(this.skills[this.editedIndex], this.editedItem); // } else {
+        //   axios
+        //     .post("/api/employee", {})
+        //     .then(response => {
+        //       console.log(response);
+        //     })
+        //     .catch(error => console.log(error.response.data));
+        //   this.skills.push(this.editedItem);
       }
 
       this.close();
-    }
-  },
-  filters: {
-    // <!-- Nested Data агуулж буй тохиолдолд бичих filters  -->
-    getSkill_level: function getSkill_level(skilltypes_rel) {
-      return skilltypes_rel.map(function (skilltypes_rel) {
-        return skilltypes_rel.skill_level;
-      });
-    },
-    getSkill_name: function getSkill_name(skilltypes_rel) {
-      return skilltypes_rel.map(function (skilltypes_rel) {
-        return skilltypes_rel.skill_type_name;
-      });
     }
   }
 });
@@ -7824,7 +7883,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\na {\n  text-decoration: none;\n}\n", ""]);
+exports.push([module.i, "\na {\n    text-decoration: none;\n}\n", ""]);
 
 // exports
 
@@ -65139,9 +65198,9 @@ var render = function() {
                               { staticClass: "white--text" },
                               [
                                 _vm._v(
-                                  "\n            " +
+                                  "\n                        " +
                                     _vm._s(link.text) +
-                                    "\n          "
+                                    "\n                    "
                                 )
                               ]
                             )
@@ -65224,9 +65283,9 @@ var render = function() {
                                       { staticClass: "white--text" },
                                       [
                                         _vm._v(
-                                          "\n                " +
+                                          "\n                                " +
                                             _vm._s(link.text) +
-                                            "\n              "
+                                            "\n                            "
                                         )
                                       ]
                                     )
@@ -65569,40 +65628,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-data-table", {
-    staticClass: "elevation-1",
-    attrs: { headers: _vm.headers, items: _vm.desserts },
-    scopedSlots: _vm._u([
-      {
-        key: "items",
-        fn: function(props) {
-          return [
-            _c("td", [_vm._v(_vm._s(props.item.name))]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-xs-right" }, [
-              _vm._v(_vm._s(props.item.calories))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-xs-right" }, [
-              _vm._v(_vm._s(props.item.fat))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-xs-right" }, [
-              _vm._v(_vm._s(props.item.carbs))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-xs-right" }, [
-              _vm._v(_vm._s(props.item.protein))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "text-xs-right" }, [
-              _vm._v(_vm._s(props.item.iron))
-            ])
-          ]
-        }
-      }
-    ])
-  })
+  return _c(
+    "form",
+    [
+      _c(
+        "v-flex",
+        { attrs: { xs12: "", sm6: "", md4: "" } },
+        [
+          _c("v-text-field", {
+            attrs: { label: "Ур чадвар", required: "" },
+            model: {
+              value: _vm.editedItems.skill_type_name,
+              callback: function($$v) {
+                _vm.$set(_vm.editedItems, "skill_type_name", $$v)
+              },
+              expression: "editedItems.skill_type_name"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs12: "", sm6: "", md4: "" } },
+        [
+          _c("v-select", {
+            attrs: {
+              items: _vm.items,
+              filled: "",
+              label: "Зэрэг, Дэв",
+              required: ""
+            },
+            model: {
+              value: _vm.editedItems.skill_level,
+              callback: function($$v) {
+                _vm.$set(_vm.editedItems, "skill_level", $$v)
+              },
+              expression: "editedItems.skill_level"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-btn", { staticClass: "primary", on: { click: _vm.save } }, [
+        _vm._v("Хадгалах")
+      ]),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { staticClass: "blue lighten-3 white--text", on: { click: _vm.clear } },
+        [_vm._v("Цэвэрлэх")]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -65632,7 +65713,161 @@ var render = function() {
       _c(
         "v-toolbar",
         { attrs: { flat: "", color: "white" } },
-        [_c("v-toolbar-title", [_vm._v("Нийт ажилтан")])],
+        [
+          _c("v-toolbar-title", [_vm._v("Нийт ажилтан")]),
+          _vm._v(" "),
+          _c("v-divider", {
+            staticClass: "mx-2",
+            attrs: { inset: "", vertical: "" }
+          }),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "v-dialog",
+            {
+              attrs: { "max-width": "900px" },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-btn",
+                        _vm._g(
+                          {
+                            staticClass: "mb-2",
+                            attrs: { color: "primary", dark: "" }
+                          },
+                          on
+                        ),
+                        [_vm._v("Шинэ ажилтан нэмэх")]
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              _vm._v(" "),
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", [
+                    _c("span", { staticClass: "headline" }, [
+                      _vm._v(_vm._s(_vm.formTitle))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-container",
+                        { attrs: { "grid-list-md": "" } },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { wrap: "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", md4: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: { label: "Ур чадвар", required: "" },
+                                    model: {
+                                      value: _vm.editedItems.skill_type_name,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.editedItems,
+                                          "skill_type_name",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "editedItems.skill_type_name"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", md4: "" } },
+                                [
+                                  _c("v-select", {
+                                    attrs: {
+                                      items: _vm.items,
+                                      filled: "",
+                                      label: "Зэрэг, Дэв",
+                                      required: ""
+                                    },
+                                    model: {
+                                      value: _vm.editedItems.skill_level,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.editedItems,
+                                          "skill_level",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "editedItems.skill_level"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "blue darken-1", flat: "" },
+                          on: { click: _vm.close }
+                        },
+                        [_vm._v("Болих")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "blue darken-1", flat: "" },
+                          on: { click: _vm.save }
+                        },
+                        [_vm._v("Хадгалах")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
         1
       ),
       _vm._v(" "),
