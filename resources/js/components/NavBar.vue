@@ -97,6 +97,36 @@ export default {
           text: "Ур чадвар",
           route: "/skills",
           show: User.loggedIn()
+        },
+        {
+          icon: "school",
+          text: "Боловсрол",
+          route: "/skills",
+          show: User.loggedIn()
+        },
+        {
+          icon: "wc",
+          text: "Гэр бүлийн байдал",
+          route: "/skills",
+          show: User.loggedIn()
+        },
+        {
+          icon: "people",
+          text: "Тѳрѳл садан",
+          route: "/skills",
+          show: User.loggedIn()
+        },
+        {
+          icon: "star",
+          text: "Шагнал, урамшуулал",
+          route: "/skills",
+          show: User.loggedIn()
+        },
+        {
+          icon: "sentiment_dissatisfied",
+          text: "Шийтгэл",
+          route: "/skills",
+          show: User.loggedIn()
         }
 
         // Роуте, icon, текст-үүдийг энд зарлаж ѳгнѳ.

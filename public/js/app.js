@@ -2038,6 +2038,31 @@ __webpack_require__.r(__webpack_exports__);
         text: "Ур чадвар",
         route: "/skills",
         show: User.loggedIn()
+      }, {
+        icon: "school",
+        text: "Боловсрол",
+        route: "/skills",
+        show: User.loggedIn()
+      }, {
+        icon: "wc",
+        text: "Гэр бүлийн байдал",
+        route: "/skills",
+        show: User.loggedIn()
+      }, {
+        icon: "people",
+        text: "Тѳрѳл садан",
+        route: "/skills",
+        show: User.loggedIn()
+      }, {
+        icon: "star",
+        text: "Шагнал, урамшуулал",
+        route: "/skills",
+        show: User.loggedIn()
+      }, {
+        icon: "sentiment_dissatisfied",
+        text: "Шийтгэл",
+        route: "/skills",
+        show: User.loggedIn()
       } // Роуте, icon, текст-үүдийг энд зарлаж ѳгнѳ.
       // {
       //   icon: "dashboard",
@@ -2487,7 +2512,7 @@ __webpack_require__.r(__webpack_exports__);
         sortable: true
       }, {
         text: "Нэр",
-        value: "lname",
+        value: "employee.lname",
         align: "right"
       }, {
         text: "Ур чадвар",
@@ -2668,6 +2693,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -65946,21 +65973,32 @@ var render = function() {
                             "v-layout",
                             { attrs: { wrap: "" } },
                             [
-                              _c("v-text-field", {
-                                attrs: {
-                                  rules: _vm.nameRules,
-                                  counter: 20,
-                                  label: "Ургын овог",
-                                  required: ""
-                                },
-                                model: {
-                                  value: _vm.editedItem.family_name,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.editedItem, "family_name", $$v)
-                                  },
-                                  expression: "editedItem.family_name"
-                                }
-                              }),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", sm6: "", md4: "" } },
+                                [
+                                  _c("v-text-field", {
+                                    attrs: {
+                                      rules: _vm.nameRules,
+                                      counter: 20,
+                                      label: "Ургын овог",
+                                      required: ""
+                                    },
+                                    model: {
+                                      value: _vm.editedItem.family_name,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.editedItem,
+                                          "family_name",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "editedItem.family_name"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
                               _vm._v(" "),
                               _c(
                                 "v-flex",

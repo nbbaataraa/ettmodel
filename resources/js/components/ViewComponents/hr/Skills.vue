@@ -96,7 +96,7 @@ export default {
         },
         {
           text: "Нэр",
-          value: "lname",
+          value: "employee.lname",
           align: "right"
         },
         {

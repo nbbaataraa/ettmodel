@@ -17,13 +17,15 @@
           <v-card-text>
             <v-container grid-list-md>
               <v-layout wrap>
-                <v-text-field
-                  v-model="editedItem.family_name"
-                  :rules="nameRules"
-                  :counter="20"
-                  label="Ургын овог"
-                  required
-                ></v-text-field>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field
+                    v-model="editedItem.family_name"
+                    :rules="nameRules"
+                    :counter="20"
+                    label="Ургын овог"
+                    required
+                  ></v-text-field>
+                </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field
                     v-model="editedItem.fname"
