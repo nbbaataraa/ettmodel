@@ -40,6 +40,10 @@ class User {
             return payload.sub;
         }
     }
+    // Нэвтэрсэн хэрэглэгчийн утгыг авна. Энэ нь id() функцыг дуудана.
+    loggedOwnID(id) {
+        return this.id() == id;
+    }
 
     name() {
         if (this.loggedIn) {

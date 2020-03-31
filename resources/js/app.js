@@ -7,6 +7,7 @@ import Vue from "vue";
 import Vuetify from "vuetify";
 import ECharts from "vue-echarts";
 import router from "./Router/router.js"; //Register Routes
+import { store } from "./components/Store/store"; //Нэрлэсэн FUNCTION оо ингэж зарлан
 
 Vue.use(Vuetify);
 
@@ -21,5 +22,6 @@ const app = new Vue({
     el: "#app",
     ECharts,
     router, //To Register App.JS
+    store, //Register VueX function
     data: { date: new Date().toISOString().substr(0, 10) }
 });

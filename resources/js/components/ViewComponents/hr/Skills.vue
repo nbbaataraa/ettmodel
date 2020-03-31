@@ -16,31 +16,18 @@
           <v-card-text>
             <v-container grid-list-md>
               <v-layout wrap>
-                <!-- <v-text-field
-                  v-model="editedItems.skill_name"
-                  :rules="nameRules"
-                  :counter="20"
-                  label="Ургын овог"
-                  required
-                ></v-text-field>
-                <v-flex xs12 sm6 md4>
-                  <v-select
-                    v-model="editedItems.skill_level"
-                    :items="items"
-                    filled
-                    label="Хотхон"
-                    required
-                  ></v-select>
-                </v-flex>-->
-
                 <v-flex xs12 sm6 md4>
                   <v-text-field v-model="editedItems.skill_name" label="Ур чадвар" required></v-text-field>
                 </v-flex>
-
+                <v-flex xs12 sm6 md4>
+                  <v-text-field v-model="editedItems.skill_type" label="Ур чадварын тѳрѳл" required></v-text-field>
+                </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-select
                     v-model="editedItems.skill_level"
                     :items="items"
+                    item-text="skill_level"
+                    item-value="id"
                     filled
                     label="Зэрэг, Дэв"
                     required
@@ -52,7 +39,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Болих</v-btn>
+            <v-btn color="red darken-1" flat @click="close">Болих</v-btn>
             <v-btn color="blue darken-1" flat @click="save">Хадгалах</v-btn>
           </v-card-actions>
         </v-card>
@@ -65,25 +52,23 @@
       </v-flex>
     </v-layout>
 
-    <v-data-table
-      :headers="headers"
-      :items="skills"
-      v-if="skills !==null"
-      :search="search"
-      class="elevation-1"
-    >
+    <v-data-table :headers="headers" :items="allskills" :search="search" class="elevation-1">
       <template slot="items" slot-scope="props">
-        <td class="text-xs-right">{{ props.item.fname }}</td>
-        <td class="text-xs-right">{{ props.item.lname }}</td>
-        <!-- Nested Data агуулж буй тохиолдолд Filters болон methods бичиж ѳгнѳ. -->
-        <td class="text-xs-right">{{ props.item.skills | getSkill_name}}</td>
-        <!-- Nested Data агуулж буй тохиолдолд Filters болон methods бичиж ѳгнѳ. -->
-        <td class="text-xs-right">{{ props.item.skills | getSkill_level}}</td>
-        <!-- Nested Data агуулж буй тохиолдолд Filters болон methods бичиж ѳгнѳ. -->
+        <td class="text-right">{{props.item.id}}</td>
+        <td class="text-xs-right">{{ props.item.employee.lname}}</td>
+        <td class="text-xs-right">{{ props.item.skill_name }}</td>
+        <td class="text-xs-right">{{ props.item.skill_type }}</td>
+        <td class="text-xs-right">{{ props.item.skill_level }}</td>
         <td class="text-xs-right">
           <v-icon color="primary" small class="mr-2" @click="editItem(props.item)">edit</v-icon>
-          <!-- <v-icon color="red" small @click="deleteItem(props.item)">delete</v-icon> -->
+          <!-- <v-icon color="red" small @click="deleteItem(props.skills)">delete</v-icon> -->
         </td>
+        <!-- Nested Data агуулж буй тохиолдолд Filters болон methods бичиж ѳгнѳ. -->
+        <!-- <td class="text-xs-right">{{ props.item.skills | getSkill_name}}</td> -->
+        <!-- Nested Data агуулж буй тохиолдолд Filters болон methods бичиж ѳгнѳ. -->
+        <!-- <td class="text-xs-right">{{ props.item.skills | getSkill_level}}</td> -->
+        <!-- <td class="text-xs-right">{{ props.item.skills | getSkill_id}}</td> -->
+        <!-- Nested Data агуулж буй тохиолдолд Filters болон methods бичиж ѳгнѳ. -->
       </template>
       <template v-slot:no-results>
         <v-alert
@@ -95,49 +80,59 @@
     </v-data-table>
   </div>
 </template>
-    <!-- <div v-for="skill in skills" :key="skill.id">
-      <div v-for="skilltype in skill.skills">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Skill Level</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">{{skill.id}}</th>
-              <td>{{skill.fname}}</td>
-              <td>{{skill.lname}}</td>
-              <td>{{skilltype.skill_level}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>-->
-  </div>
-</template>
 
 <script>
 export default {
   name: "Skills",
   data() {
     return {
+      //loggedOwnID: User.loggedOwnID(this.data.user_id), Ѳгѳгдлийн сан дээр Logged Буюу нэвтэрсэн хэрэглэгчийн ID Утгыг авна.
       headers: [
-        { text: "Овог", value: "fname", align: "right", sortable: true },
-        { text: "Нэр", value: "lname", align: "right" },
-        { text: "Ур чадвар", value: "skill_name", align: "right" },
-        { text: "Зэрэг,дэв", value: "skill_level", align: "right" },
-        { text: "Үйлдэлүүд", value: "name", sortable: false, align: "right" }
+        {
+          text: "Д/Д",
+          value: "id",
+          align: "right",
+          sortable: true
+        },
+        {
+          text: "Нэр",
+          value: "lname",
+          align: "right"
+        },
+        {
+          text: "Ур чадвар",
+          value: "skill_name",
+          align: "right"
+        },
+        {
+          text: "Чадварын тѳрѳл",
+          value: "skill_type",
+          align: "right"
+        },
+        {
+          text: "Зэрэг, Дэв",
+          value: "skill_level",
+          align: "right",
+          sortable: true
+        },
+
+        {
+          text: "Үйлдэлүүд",
+          value: "id",
+          sortable: false,
+          align: "right"
+        }
       ],
       dialog: false,
+      allskills: [],
       skills: [],
-      dataLoaded: false,
       search: "",
       editedIndex: -1,
       editedItems: {
+        allskills: [],
+        employee_id: null,
+        fname: "",
+        lname: "",
         skill_name: "",
         skill_level: ""
       },
@@ -155,6 +150,9 @@ export default {
     },
     getSkill_name: skills => {
       return skills.map(skills => skills.skill_name);
+    },
+    getSkill_id: skills => {
+      return skills.map(skills => skills.id);
     }
   },
   computed: {
@@ -175,28 +173,49 @@ export default {
     getSkill_name: skills => {
       return skills.map(skills => skills.skill_name);
     },
+    getSkill_id: skills => {
+      return skills.map(skills => skills.id);
+    },
     fetchSkillData() {
       axios
-        .get("/api/skill")
+        .get("/api/skill", {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          }
+        })
         .then(res => {
           this.skills = res.data;
-          this.dataLoaded = true;
+        })
+        .catch(error => console.log(error.response.data));
+    },
+    fetchSkills() {
+      axios
+        .get("api/skillshow", {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          }
+        })
+        .then(res => {
+          this.allskills = res.data;
         })
         .catch(error => console.log(error.response.data));
     },
     initialize() {
       this.fetchSkillData();
+      this.fetchSkills();
     },
     editItem(item) {
-      this.editedIndex = this.skills.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      this.editedIndex = this.allskills.indexOf(item);
+      this.editedItems = Object.assign({}, item);
       this.dialog = true;
     },
+
     // deleteItem(item) {
     //   const index = this.skills.indexOf(item);
     //   confirm("Та тухайн ѳгѳгдѳл устгахдаа итгэлтэй байна уу?") &&
     //     this.skills.splice(index, 1);
-
     //   axios
     //     .delete("//" + item.id)
     //     .then(response => {
@@ -206,17 +225,41 @@ export default {
     // },
     close() {
       this.dialog = false;
+
       setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedItems = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       }, 300);
     },
     save() {
-      alert("Click saved");
+      if (this.editedIndex > -1) {
+        axios
+          .put("/api/skill/" + this.allskills.id, {
+            employee_id: this.skills.id,
+            skill_name: this.editedItems.skill_name,
+            skill_type: this.editedItems.skill_type,
+            skill_level: this.editedItems.skill_level
+          })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => console.log(error.response.data));
+      } else {
+        axios
+          .post("/api/skill", {
+            skill_name: this.editedItems.skill_name,
+            skill_type: this.editedItems.skill_type,
+            skill_level: this.editedItems.skill_level
+          })
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => console.log(error.response.data));
+        this.allskills.push(this.editedItems);
+      }
     }
   }
 };
 </script>
-
 <style>
 </style>

@@ -21,7 +21,8 @@ Route::apiResource('/employee', 'EmployeeController');
 Route::apiResource('/status', 'StatusController');
 Route::apiResource('/skill', 'SkillController');
 
-
+Route::get('/skillshow', 'SkillController@skillShow')->name('skillshow');
+Route::put('/skillshowupdate/{id}', 'SkillController@skillShowUpdate')->name('skillShowUpdate');
 Route::group([
 
     'middleware' => 'api',
