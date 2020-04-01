@@ -101,7 +101,7 @@ export default {
         {
           icon: "school",
           text: "Боловсрол",
-          route: "/skills",
+          route: "/education",
           show: User.loggedIn()
         },
         {

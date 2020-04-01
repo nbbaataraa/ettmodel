@@ -7,6 +7,7 @@ import UserList from "../components/ViewComponents/hr/UsersList.vue"; //Calling 
 import Skills from "../components/ViewComponents/hr/Skills.vue"; //Calling Router Vue's
 import Signup from "../components/ViewComponents/Signup.vue"; //Calling Router Vue's
 import Logout from "../components/ViewComponents/Logout.vue"; //Calling Router Vue's
+import Education from "../components/ViewComponents/hr/Education.vue";
 Vue.use(VueRouter);
 //To Call Routes in const
 const routes = [
@@ -15,7 +16,8 @@ const routes = [
     { path: "/userlist", component: UserList, name: "userlists" },
     { path: "/signup", component: Signup, name: "signup" },
     { path: "/logout", component: Logout, name: "logout" },
-    { path: "/skills", component: Skills, name: "skills" }
+    { path: "/skills", component: Skills, name: "skills" },
+    { path: "/education", component: Education, name: "education" }
 
     //{ path: "/dispatcher", component: App },
     //{ path: "/station", component: App }
