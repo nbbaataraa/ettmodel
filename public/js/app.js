@@ -2423,8 +2423,92 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Education"
+  data: function data() {
+    return {
+      //loggedOwnID: User.loggedOwnID(this.data.user_id), Ѳгѳгдлийн сан дээр Logged Буюу нэвтэрсэн хэрэглэгчийн ID Утгыг авна.
+      headers: [{
+        text: "Д/Д",
+        value: "id",
+        align: "right",
+        sortable: true
+      }, {
+        text: "Нэр",
+        value: "employee.lname",
+        align: "right"
+      }, {
+        text: "Дунд сургууль",
+        value: "edu_senior",
+        align: "right"
+      }, {
+        text: "Ахлах сургууль",
+        value: "edu_high",
+        align: "right"
+      }, {
+        text: "Их сургууль",
+        value: "edu_universities",
+        align: "right",
+        sortable: true
+      }, {
+        text: "Магистер",
+        value: "edu_magister",
+        sortable: false,
+        align: "right"
+      }, {
+        text: "Доктор",
+        value: "edu_doctor",
+        sortable: false,
+        align: "right"
+      }],
+      edu: [],
+      search: ""
+    };
+  },
+  created: function created() {
+    this.initialize();
+  },
+  methods: {
+    fetchEducation: function fetchEducation() {
+      var _this = this;
+
+      axios.get("api/education", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }
+      }).then(function (res) {
+        _this.edu = res.data;
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
+    },
+    initialize: function initialize() {
+      this.fetchEducation();
+    }
+  }
 });
 
 /***/ }),
@@ -2438,18 +2522,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -65596,16 +65668,104 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    [
+      _c(
+        "v-layout",
+        [
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md4: "" } },
+            [
+              _c("v-text-field", {
+                attrs: {
+                  "append-icon": "search",
+                  label: "Хайх",
+                  "single-line": "",
+                  "hide-details": ""
+                },
+                model: {
+                  value: _vm.search,
+                  callback: function($$v) {
+                    _vm.search = $$v
+                  },
+                  expression: "search"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: { headers: _vm.headers, items: _vm.edu, search: _vm.search },
+        scopedSlots: _vm._u([
+          {
+            key: "items",
+            fn: function(props) {
+              return [
+                _c("td", { staticClass: "text-right" }, [
+                  _vm._v(_vm._s(props.item.id))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-right" }, [
+                  _vm._v(_vm._s(props.item.employee.lname))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-right" }, [
+                  _vm._v(_vm._s(props.item.edu_senior))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-right" }, [
+                  _vm._v(_vm._s(props.item.edu_high))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-right" }, [
+                  _vm._v(_vm._s(props.item.edu_universities))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-right" }, [
+                  _vm._v(_vm._s(props.item.edu_magister))
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-xs-right" }, [
+                  _vm._v(_vm._s(props.item.edu_doctor))
+                ])
+              ]
+            }
+          },
+          {
+            key: "no-results",
+            fn: function() {
+              return [
+                _c(
+                  "v-alert",
+                  { attrs: { value: true, color: "error", icon: "warning" } },
+                  [
+                    _vm._v(
+                      'Таны хайсан "' +
+                        _vm._s(_vm.search) +
+                        '" утганд ѳгѳгдѳл алга.'
+                    )
+                  ]
+                )
+              ]
+            },
+            proxy: true
+          }
+        ])
+      })
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h3", [_vm._v("This is Education")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Skill;
+use App\Model\Education;
 
 
 class Employee extends Model
@@ -44,11 +45,14 @@ class Employee extends Model
 
     public function status()
     {
-        return $this->hasOne(Status::class);
+        return $this->hasOne(Status::class,'id');
     }
 
     public function skills(){
         return $this->hasMany(Skill::class, 'id');
+    }
+    public function educations(){
+        return $this->hasMany(Education::class, 'id');
     }
     
         //Эхлээд хандах Модел оо зарлаад дараа нь Аль Модел ашиглан холбогдохоо зарлана.

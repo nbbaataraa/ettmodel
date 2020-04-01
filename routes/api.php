@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 Route::apiResource('/employee', 'EmployeeController');
 Route::apiResource('/status', 'StatusController');
 Route::apiResource('/skill', 'SkillController');
+Route::apiResource('/education', 'EducationController');
 
 Route::get('/skillshow', 'SkillController@skillShow')->name('skillshow');
 Route::put('/skillshowupdate/{id}', 'SkillController@skillShowUpdate')->name('skillShowUpdate');

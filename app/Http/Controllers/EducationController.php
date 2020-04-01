@@ -14,7 +14,9 @@ class EducationController extends Controller
      */
     public function index()
     {
-        //
+        $education = Education::with('employee')->get();
+        return $education;
+
     }
 
     /**

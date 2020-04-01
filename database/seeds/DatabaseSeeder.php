@@ -5,6 +5,7 @@ use App\Status;
 use App\User;
 use Illuminate\Database\Seeder;
 use App\Model\Skill;
+use App\Model\Education;
 
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         factory(User::class, 10)->create();
         
         factory(Skill::class, 300)->create();
+        factory(Education::class, 50)->create();
 
         
         
