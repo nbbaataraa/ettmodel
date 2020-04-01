@@ -2041,7 +2041,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         icon: "school",
         text: "Боловсрол",
-        route: "/skills",
+        route: "/education",
         show: User.loggedIn()
       }, {
         icon: "wc",
@@ -2404,6 +2404,27 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewComponents/hr/Education.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewComponents/hr/Education.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Education"
 });
 
 /***/ }),
@@ -65560,6 +65581,37 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewComponents/hr/Education.vue?vue&type=template&id=05bff81c&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewComponents/hr/Education.vue?vue&type=template&id=05bff81c& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h3", [_vm._v("This is Education")])])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewComponents/hr/Skills.vue?vue&type=template&id=470dfd7e&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ViewComponents/hr/Skills.vue?vue&type=template&id=470dfd7e& ***!
@@ -126962,6 +127014,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ViewComponents_hr_Skills_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/ViewComponents/hr/Skills.vue */ "./resources/js/components/ViewComponents/hr/Skills.vue");
 /* harmony import */ var _components_ViewComponents_Signup_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/ViewComponents/Signup.vue */ "./resources/js/components/ViewComponents/Signup.vue");
 /* harmony import */ var _components_ViewComponents_Logout_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/ViewComponents/Logout.vue */ "./resources/js/components/ViewComponents/Logout.vue");
+/* harmony import */ var _components_ViewComponents_hr_Education_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/ViewComponents/hr/Education.vue */ "./resources/js/components/ViewComponents/hr/Education.vue");
 
 
 
@@ -126974,6 +127027,7 @@ __webpack_require__.r(__webpack_exports__);
  //Calling Router Vue's
 
  //Calling Router Vue's
+
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); //To Call Routes in const
 
@@ -127000,6 +127054,10 @@ var routes = [{
   path: "/skills",
   component: _components_ViewComponents_hr_Skills_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
   name: "skills"
+}, {
+  path: "/education",
+  component: _components_ViewComponents_hr_Education_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+  name: "education"
 } //{ path: "/dispatcher", component: App },
 //{ path: "/station", component: App }
 ]; //To Register and export Defaults
@@ -127725,6 +127783,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_f3e7b5f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_f3e7b5f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewComponents/hr/Education.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/ViewComponents/hr/Education.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Education_vue_vue_type_template_id_05bff81c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Education.vue?vue&type=template&id=05bff81c& */ "./resources/js/components/ViewComponents/hr/Education.vue?vue&type=template&id=05bff81c&");
+/* harmony import */ var _Education_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Education.vue?vue&type=script&lang=js& */ "./resources/js/components/ViewComponents/hr/Education.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Education_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Education_vue_vue_type_template_id_05bff81c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Education_vue_vue_type_template_id_05bff81c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ViewComponents/hr/Education.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewComponents/hr/Education.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/ViewComponents/hr/Education.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Education_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Education.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewComponents/hr/Education.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Education_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ViewComponents/hr/Education.vue?vue&type=template&id=05bff81c&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/ViewComponents/hr/Education.vue?vue&type=template&id=05bff81c& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Education_vue_vue_type_template_id_05bff81c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Education.vue?vue&type=template&id=05bff81c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ViewComponents/hr/Education.vue?vue&type=template&id=05bff81c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Education_vue_vue_type_template_id_05bff81c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Education_vue_vue_type_template_id_05bff81c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
