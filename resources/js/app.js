@@ -5,11 +5,13 @@ window.Vue = require("vue");
 
 import Vue from "vue";
 import Vuetify from "vuetify";
+//import Bootstrap from "bootstrap";
 import ECharts from "vue-echarts";
 import router from "./Router/router.js"; //Register Routes
 import { store } from "./components/Store/store"; //Нэрлэсэн FUNCTION оо ингэж зарлан
 
 Vue.use(Vuetify);
+//Vue.use(Bootstrap);
 
 import User from "./Helpers/User";
 

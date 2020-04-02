@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Education;
+use App\Employee;
 use Illuminate\Http\Request;
 
 class EducationController extends Controller
@@ -16,9 +17,7 @@ class EducationController extends Controller
     {
         $education = Education::with('employee')->get();
         return $education;
-
     }
-
     /**
      * Show the form for creating a new resource.
      *

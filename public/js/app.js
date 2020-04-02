@@ -2446,6 +2446,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2483,12 +2508,25 @@ __webpack_require__.r(__webpack_exports__);
         sortable: false,
         align: "right"
       }],
+      loading: false,
       edu: [],
-      search: ""
+      // Autocomplate хийхэд search [] массив зарлаж ѳгнѳ.
+      search: "",
+      searchTable: "",
+      // Autocomplate нь утгуудаа items [] массивт ѳгнѳ.
+      items: [],
+      // Autocomplate нь item[] массиваас select массиваас утга авна.
+      select: null
     };
   },
   created: function created() {
     this.initialize();
+  },
+  // Autocomplate watch:{} hook ашиглан утга авна. Энэ нь утга авахдаа method-оос ирнэ.
+  watch: {
+    search: function search(val) {
+      val && val !== this.select && this.filterNames(val);
+    }
   },
   methods: {
     fetchEducation: function fetchEducation() {
@@ -2505,8 +2543,24 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(error.response.data);
       });
     },
+    // Энэ method нь Autocomplate хийхэд чухал үүрэгтэй ба WATCH:{} hook руу item[] массивт database-н object утгыг задалж ѳгнѳ.
+    filterNames: function filterNames(v) {
+      var _this2 = this;
+
+      this.loading = true;
+      setTimeout(function () {
+        _this2.items = _this2.edu.filter(function (e) {
+          return Object.keys(e).some(function (key) {
+            var string = String(e[key]);
+            return string.toLowerCase().indexOf((v || "").toLowerCase()) > -1;
+          });
+        });
+        _this2.loading = false;
+      }, 500);
+    },
     initialize: function initialize() {
       this.fetchEducation();
+      this.filterNames();
     }
   }
 });
@@ -65688,11 +65742,11 @@ var render = function() {
                   "hide-details": ""
                 },
                 model: {
-                  value: _vm.search,
+                  value: _vm.searchTable,
                   callback: function($$v) {
-                    _vm.search = $$v
+                    _vm.searchTable = $$v
                   },
-                  expression: "search"
+                  expression: "searchTable"
                 }
               })
             ],
@@ -65704,7 +65758,11 @@ var render = function() {
       _vm._v(" "),
       _c("v-data-table", {
         staticClass: "elevation-1",
-        attrs: { headers: _vm.headers, items: _vm.edu, search: _vm.search },
+        attrs: {
+          headers: _vm.headers,
+          items: _vm.edu,
+          search: _vm.searchTable
+        },
         scopedSlots: _vm._u([
           {
             key: "items",
@@ -65750,7 +65808,7 @@ var render = function() {
                   [
                     _vm._v(
                       'Таны хайсан "' +
-                        _vm._s(_vm.search) +
+                        _vm._s(_vm.searchTable) +
                         '" утганд ѳгѳгдѳл алга.'
                     )
                   ]
@@ -65760,7 +65818,52 @@ var render = function() {
             proxy: true
           }
         ])
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md4: "" } },
+            [
+              _c("v-autocomplete", {
+                attrs: {
+                  loading: _vm.loading,
+                  items: _vm.items,
+                  "item-text": "employee.lname",
+                  "item-value": "id",
+                  "search-input": _vm.search,
+                  label: "Enter Name: "
+                },
+                model: {
+                  value: _vm.select,
+                  callback: function($$v) {
+                    _vm.select = $$v
+                  },
+                  expression: "select"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "v-layout",
+                [
+                  _c(
+                    "v-flex",
+                    [
+                      _c("v-text-field", { attrs: { label: "Type Some Text" } })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -127253,13 +127356,15 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); //Call Vutify
 
 
+ //import Bootstrap from "bootstrap";
 
 
  //Register Routes
 
  //Нэрлэсэн FUNCTION оо ингэж зарлан
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a); //Vue.use(Bootstrap);
+
 
 window.User = _Helpers_User__WEBPACK_IMPORTED_MODULE_5__["default"]; // console.log(User.hasToken());
 
