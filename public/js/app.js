@@ -2457,25 +2457,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2510,6 +2491,11 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: "Доктор",
         value: "edu_doctor",
+        sortable: false,
+        align: "right"
+      }, {
+        text: "Үйлдэлүүд",
+        value: "id",
         sortable: false,
         align: "right"
       }],
@@ -2566,6 +2552,9 @@ __webpack_require__.r(__webpack_exports__);
     initialize: function initialize() {
       this.fetchEducation();
       this.filterNames();
+    },
+    editItem: function editItem() {
+      alert("You Clicked Edit button");
     }
   }
 });
@@ -65739,6 +65728,16 @@ var render = function() {
             "v-flex",
             { attrs: { xs12: "", sm6: "", md4: "" } },
             [
+              _c(
+                "v-btn",
+                {
+                  staticClass: "right",
+                  attrs: { fab: "", dark: "", color: "indigo" }
+                },
+                [_c("v-icon", { attrs: { dark: "" } }, [_vm._v("add")])],
+                1
+              ),
+              _vm._v(" "),
               _c("v-text-field", {
                 attrs: {
                   "append-icon": "search",
@@ -65754,23 +65753,6 @@ var render = function() {
                   expression: "searchTable"
                 }
               })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-layout",
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm6: "", md4: "" } },
-            [
-              _c("v-btn", { staticClass: "primary" }, [
-                _vm._v("Back to Education")
-              ])
             ],
             1
           )
@@ -65816,7 +65798,28 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", { staticClass: "text-xs-right" }, [
                   _vm._v(_vm._s(props.item.edu_doctor))
-                ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "text-xs-right" },
+                  [
+                    _c(
+                      "v-icon",
+                      {
+                        staticClass: "mr-2",
+                        attrs: { color: "primary", small: "" },
+                        on: {
+                          click: function($event) {
+                            return _vm.editItem(props.item)
+                          }
+                        }
+                      },
+                      [_vm._v("edit")]
+                    )
+                  ],
+                  1
+                )
               ]
             }
           },
@@ -65865,21 +65868,7 @@ var render = function() {
                   },
                   expression: "select"
                 }
-              }),
-              _vm._v(" "),
-              _c(
-                "v-layout",
-                [
-                  _c(
-                    "v-flex",
-                    [
-                      _c("v-text-field", { attrs: { label: "Type Some Text" } })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+              })
             ],
             1
           )
