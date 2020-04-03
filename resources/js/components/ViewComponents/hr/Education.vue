@@ -12,6 +12,11 @@
         ></v-text-field>
       </v-flex>
     </v-layout>
+    <v-layout>
+      <v-flex xs12 sm6 md4>
+        <v-btn class="primary">Back to Education</v-btn>
+      </v-flex>
+    </v-layout>
     <v-data-table :headers="headers" :items="edu" :search="searchTable" class="elevation-1">
       <template slot="items" slot-scope="props">
         <td class="text-right">{{props.item.id}}</td>

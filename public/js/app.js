@@ -2471,6 +2471,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -65749,6 +65754,23 @@ var render = function() {
                   expression: "searchTable"
                 }
               })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md4: "" } },
+            [
+              _c("v-btn", { staticClass: "primary" }, [
+                _vm._v("Back to Education")
+              ])
             ],
             1
           )
