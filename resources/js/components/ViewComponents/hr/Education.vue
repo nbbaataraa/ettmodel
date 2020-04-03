@@ -3,9 +3,11 @@
     <v-layout>
         <v-spacer></v-spacer>
         <v-flex xs12 sm6 md4>
-            <v-btn fab dark color="indigo" class="right">
-                <v-icon dark>add</v-icon>
-            </v-btn>
+            <router-link to="/educationedit">
+                <v-btn small fab dark color="indigo" class="right">
+                    <v-icon dark>add</v-icon>
+                </v-btn>
+            </router-link>
             <v-text-field v-model="searchTable" append-icon="search" label="Хайх" single-line hide-details></v-text-field>
         </v-flex>
     </v-layout>
@@ -97,7 +99,8 @@ export default {
             // Autocomplate нь утгуудаа items [] массивт ѳгнѳ.
             items: [],
             // Autocomplate нь item[] массиваас select массиваас утга авна.
-            select: null
+            select: null,
+
         };
     },
     created() {
