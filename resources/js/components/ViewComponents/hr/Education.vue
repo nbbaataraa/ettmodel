@@ -3,7 +3,7 @@
     <v-layout>
         <v-spacer></v-spacer>
         <v-flex xs12 sm6 md4>
-            <router-link to="/educationedit">
+            <router-link to="/addedu">
                 <v-btn small fab dark color="indigo" class="right">
                     <v-icon dark>add</v-icon>
                 </v-btn>
@@ -22,7 +22,10 @@
             <td class="text-xs-right">{{ props.item.edu_magister }}</td>
             <td class="text-xs-right">{{ props.item.edu_doctor }}</td>
             <td class="text-xs-right">
-                <v-icon color="primary" small class="mr-2" @click="editItem(props.item)">edit</v-icon>
+                <router-link :to="`educationedit/${props.item.id}`">
+                    <v-icon color="primary" small class="mr-2" @click="(props.item.id)">edit</v-icon>
+                </router-link>
+
                 <!-- <v-icon color="red" small @click="deleteItem(props.skills)">delete</v-icon> -->
             </td>
         </template>
@@ -144,7 +147,7 @@ export default {
             this.filterNames();
         },
         editItem() {
-            alert("You Clicked Edit button");
+
         }
     }
 };

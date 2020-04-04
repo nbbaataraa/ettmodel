@@ -9,6 +9,7 @@ import Signup from "../components/ViewComponents/Signup.vue"; //Calling Router V
 import Logout from "../components/ViewComponents/Logout.vue"; //Calling Router Vue's
 import Education from "../components/ViewComponents/hr/Education.vue";
 import Eduedit from "../components/ViewComponents/hr/Eduedit.vue";
+import AddEdu from "../components/ViewComponents/hr/AddEdu.vue";
 Vue.use(VueRouter);
 //To Call Routes in const
 const routes = [{
@@ -46,9 +47,14 @@ const routes = [{
         name: "education"
     },
     {
-        path: "/educationedit",
+        path: "/educationedit/:educationid",
         component: Eduedit,
         name: "Eduedit"
+    },
+    {
+        path: "/addedu",
+        component: AddEdu,
+        name: "AddEdu"
     }
 
     //{ path: "/dispatcher", component: App },

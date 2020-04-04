@@ -5,14 +5,14 @@
             <v-icon dark>arrow_back_ios</v-icon>
         </v-btn>
     </router-link>
-    <v-toolbar color="indigo white--text">
+    <v-toolbar color="warning white--text">
         <v-toolbar-title>
-            ЗАСАХ
+            НЭМЭХ
         </v-toolbar-title>
     </v-toolbar>
     <v-container>
         <v-layout row>
-            <v-flex grow pa-1>(())
+            <v-flex grow pa-1>
                 <form class="xs6">
                     <v-text-field label="Name" required></v-text-field>
                     <v-text-field label="E-mail" required></v-text-field>
