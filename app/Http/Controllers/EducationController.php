@@ -14,7 +14,7 @@ class EducationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {//
         $education = Education::with('employee')->get();
         return $education;
     }

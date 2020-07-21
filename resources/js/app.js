@@ -18,7 +18,7 @@ import User from "./Helpers/User";
 window.User = User;
 // console.log(User.hasToken());
 window.EventBus = new Vue();
-
+// Vue.config.devtools = false; // Энэ нь Vue JS DevTools хааж ѳгнѳ. Серверт байршуулахдаа үүнийг хэрэглэнэ.
 Vue.component("app", require("./components/App.vue").default);
 const app = new Vue({
     el: "#app",

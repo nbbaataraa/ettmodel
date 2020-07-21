@@ -23,8 +23,8 @@ class SkillController extends Controller
 
         //ManyToManyThrough Relation хийж байгаа үед. 
         // Зѳвхѳн модел дээрээ зарласан FUNCTION-оо дуудна.
-         $employee = Employee::with('skills')->get();
-         return $employee;
+         $skill = Skill::with('employee')->get();
+         return $skill;
         //Show Only One Value
         // $employee = Employee::all();
         // foreach($employee as $emp){

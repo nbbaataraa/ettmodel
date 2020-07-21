@@ -12,7 +12,8 @@ import Eduedit from "../components/ViewComponents/hr/Eduedit.vue";
 import AddEdu from "../components/ViewComponents/hr/AddEdu.vue";
 Vue.use(VueRouter);
 //To Call Routes in const
-const routes = [{
+const routes = [
+    {
         path: "/login",
         component: Login
     },
@@ -47,7 +48,7 @@ const routes = [{
         name: "education"
     },
     {
-        path: "/educationedit/:educationid",
+        path: "/education/:educationid",
         component: Eduedit,
         name: "Eduedit"
     },
