@@ -36,7 +36,9 @@ class EducationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Education::create($request->all());
+        return Response('Stored', Response::HTTP_CREATED);
+        
     }
 
     /**
@@ -47,19 +49,13 @@ class EducationController extends Controller
      */
     public function show(Education $education)
     {
-        //
+        $education = Education::find($education);
+        return response()->json([
+            'education' =>$education
+        ], Response::HTTP_ACCEPTED);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Education  $education
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Education $education)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -70,7 +66,9 @@ class EducationController extends Controller
      */
     public function update(Request $request, Education $education)
     {
-        //
+         $education ->update($request->all());
+         return Response('Updated Education', Response::HTTP_ACCEPTED);
+
     }
 
     /**
@@ -81,6 +79,7 @@ class EducationController extends Controller
      */
     public function destroy(Education $education)
     {
-        //
+        $education->delete();
+        return Response('Deleted', Response::HTTP_ACCEPTED);
     }
 }

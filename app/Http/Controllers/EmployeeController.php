@@ -12,7 +12,7 @@ class EmployeeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('JWT', ['except' => ['index', 'store', 'edit', 'update', 'create', 'show', 'destroy']]);
+        $this->middleware('JWT', ['except' => ['index', 'store', 'edit', 'update', 'create', 'show', 'destroy', 'dashboarduser']]);
     }
     /**
      * Display a listing of the resource.
@@ -35,6 +35,15 @@ class EmployeeController extends Controller
     public function create()
     {
         //
+    }
+    /**
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboarduser(){
+        $employee = Employee::all()->count();   
+        return $employee;
     }
 
     /**

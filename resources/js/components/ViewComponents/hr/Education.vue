@@ -3,7 +3,7 @@
     <v-layout>
       <v-spacer></v-spacer>
       <v-flex xs12 sm6 md4>
-        <router-link to="/addedu">
+        <router-link to="/new">
           <v-btn small fab dark color="indigo" class="right">
             <v-icon dark>add</v-icon>
           </v-btn>
@@ -28,7 +28,7 @@
         <td class="text-xs-right">{{ props.item.edu_magister }}</td>
         <td class="text-xs-right">{{ props.item.edu_doctor }}</td>
         <td class="text-xs-right">
-          <router-link :to="`education/${props.item.id}`">
+          <router-link :to="`/education/${props.item.id}`">
             <v-icon color="primary" small class="mr-2" @click="(props.item.id)">edit</v-icon>
           </router-link>
           <!-- <v-icon color="red" small @click="deleteItem(props.skills)">delete</v-icon> -->
@@ -61,17 +61,20 @@ export default {
         {
           text: "Нэр",
           value: "employee.lname",
-          align: "right"
+          align: "right",
+          sortable: true
         },
         {
           text: "Дунд сургууль",
           value: "edu_senior",
-          align: "right"
+          align: "right",
+          sortable: true
         },
         {
           text: "Ахлах сургууль",
           value: "edu_high",
-          align: "right"
+          align: "right",
+          sortable: true
         },
         {
           text: "Их сургууль",
@@ -82,13 +85,13 @@ export default {
         {
           text: "Магистер",
           value: "edu_magister",
-          sortable: false,
+          sortable: true,
           align: "right"
         },
         {
           text: "Доктор",
           value: "edu_doctor",
-          sortable: false,
+          sortable: true,
           align: "right"
         },
         {

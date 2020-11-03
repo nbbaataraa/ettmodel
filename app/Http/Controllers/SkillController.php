@@ -32,31 +32,7 @@ class SkillController extends Controller
         // }
         
     }
-    /**
-     * Show the form for skill show a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function skillShow(){
-        $skill = Skill::with('employee')->get();
-        return $skill;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Skill  $skill
-     * @return \Illuminate\Http\Response
-     */
-    public function skillShowUpdate(Request $request, Skill $skill)
-    {
-        $skill ->update($request->all());
-        return Response('Updated Skills From SjillShow', Response::HTTP_ACCEPTED);
-    }
-
     
-
     /**
      * Show the form for creating a new resource.
      *
@@ -122,6 +98,6 @@ class SkillController extends Controller
      */
     public function destroy(Skill $skill)
     {
-        //
+        
     }
 }

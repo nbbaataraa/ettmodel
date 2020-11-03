@@ -53,7 +53,7 @@ const routes = [
         name: "Eduedit"
     },
     {
-        path: "/addedu",
+        path: "/new",
         component: AddEdu,
         name: "AddEdu"
     }

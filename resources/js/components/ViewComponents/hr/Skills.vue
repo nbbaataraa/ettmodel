@@ -64,7 +64,7 @@
       </v-flex>
     </v-layout>
 
-    <v-data-table :headers="headers" :items="allskills" :search="search" class="elevation-1">
+    <v-data-table :headers="headers" :items="skills" :search="search" class="elevation-1">
       <template slot="items" slot-scope="props">
         <td class="text-right">{{props.item.id}}</td>
         <td class="text-xs-right">{{ props.item.employee.lname || null}}</td>
@@ -136,7 +136,6 @@ export default {
         }
       ],
       dialog: false,
-      allskills: [],
       skills: [],
       search: "",
       // Autocomplate хийхэд searchUser [] массив зарлаж ѳгнѳ.
@@ -149,7 +148,6 @@ export default {
       loading: false,
       editedIndex: -1,
       editedItems: {
-        allskills: [],
         employee_id: null,
         fname: "",
         lname: "",
@@ -214,19 +212,6 @@ export default {
         })
         .catch(error => console.log(error.response.data));
     },
-    fetchSkills() {
-      axios
-        .get("api/skillshow", {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          }
-        })
-        .then(res => {
-          this.allskills = res.data;
-        })
-        .catch(error => console.log(error.response.data));
-    },
     // Энэ method нь Autocomplate хийхэд чухал үүрэгтэй ба WATCH:{} hook руу items[] массивт database-н object утгыг задалж ѳгнѳ.
     filterNames(v) {
       this.loading = true;
@@ -242,10 +227,9 @@ export default {
     },
     initialize() {
       this.fetchSkillData();
-      this.fetchSkills();
     },
     editItem(item) {
-      this.editedIndex = this.allskills.indexOf(item);
+      this.editedIndex = this.skills.indexOf(item);
       this.editedItems = Object.assign({}, item);
       this.dialog = true;
     },
@@ -294,7 +278,7 @@ export default {
             console.log(response);
           })
           .catch(error => console.log(error.response.data));
-        this.allskills.push(this.editedItems);
+        this.skills.push(this.editedItems);
       }
     }
   }

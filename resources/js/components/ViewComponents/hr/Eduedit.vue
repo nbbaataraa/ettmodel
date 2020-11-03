@@ -22,18 +22,27 @@
 
                 <v-layout row>
                   <v-flex grow pa-4 xs12 sm6 md12>
-                    <v-autocomplete
-                      v-model="select"
-                      :loading="loading"
-                      :items="edu"
-                      item-text="employee.lname"
-                      item-value="id"
-                      :search-input="search"
-                      label="Enter Name: "
-                    ></v-autocomplete>
-                    <v-text-field label="E-mail" required></v-text-field>
-                    <v-select label="Select" required></v-select>
-                    <v-checkbox label="Option" required></v-checkbox>
+                    <v-text-field
+                      label="Ерѳнхий боловсролын сургуулий нэр /Дунд/:"
+                      v-model="edu_senior"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      label="Ерѳнхий боловсролын сургуулий нэр /Ахлах/:"
+                      v-model="edu_high"
+                      required
+                    ></v-text-field>
+                  </v-flex>
+                </v-layout>
+                <v-card-title primary-title>
+                  <div>
+                    <h3 class="headline mb-0">МСҮТ сургууль</h3>
+                  </div>
+                </v-card-title>
+
+                <v-layout row>
+                  <v-flex grow pa-4 xs12 sm6 md12>
+                    <v-text-field label="МСҮТ сургуулий нэр:" v-model="edu_collage" required></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-card-title primary-title>
@@ -41,12 +50,14 @@
                     <h3 class="headline mb-0">Их дээд сургууль</h3>
                   </div>
                 </v-card-title>
+
                 <v-layout row>
                   <v-flex grow pa-4 xs12 sm6 md12>
-                    <v-text-field label="Name" required></v-text-field>
-                    <v-text-field label="E-mail" required></v-text-field>
-                    <v-select label="Select" required></v-select>
-                    <v-checkbox label="Option" required></v-checkbox>
+                    <v-text-field
+                      label="Их дээд сургуулий нэр:"
+                      v-model="edu_universities"
+                      required
+                    ></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-card-title primary-title>
@@ -54,12 +65,14 @@
                     <h3 class="headline mb-0">Магистер</h3>
                   </div>
                 </v-card-title>
+
                 <v-layout row>
                   <v-flex grow pa-4 xs12 sm6 md12>
-                    <v-text-field label="Name" required></v-text-field>
-                    <v-text-field label="E-mail" required></v-text-field>
-                    <v-select label="Select" required></v-select>
-                    <v-checkbox label="Option" required></v-checkbox>
+                    <v-text-field
+                      label="Магистер боловсролын сургуулий нэр:"
+                      v-model="edu_magister"
+                      required
+                    ></v-text-field>
                   </v-flex>
                 </v-layout>
                 <v-card-title primary-title>
@@ -70,15 +83,16 @@
 
                 <v-layout row>
                   <v-flex grow pa-4 xs12 sm6 md12>
-                    <v-text-field label="Name" required></v-text-field>
-                    <v-text-field label="E-mail" required></v-text-field>
-                    <v-select label="Select" required></v-select>
-                    <v-checkbox label="Option" required></v-checkbox>
+                    <v-text-field
+                      label="Доктрант боловсролын сургуулий нэр:"
+                      v-model="edu_doctor"
+                      required
+                    ></v-text-field>
                   </v-flex>
                 </v-layout>
 
                 <v-card-actions>
-                  <v-btn flat color="primary">Хадгалах</v-btn>
+                  <v-btn flat color="primary" @click="submit">Хадгалах</v-btn>
                   <router-link to="/education">
                     <v-btn flat color="warning">Болих</v-btn>
                   </router-link>
@@ -97,52 +111,35 @@ export default {
   data() {
     return {
       edu: [],
-      loading: false,
-      search: "",
       searchTable: "",
-      items: [],
-      select: null
+      edu_collage: "",
+      edu_high: "",
+      edu_senior: "",
+      edu_magister: "",
+      edu_doctor: "",
+      edu_universities: ""
     };
   },
+
   created() {
     this.initialize();
   },
+
+  mounted() {
+    axios
+      .get("/api/education/" + this.$route.params.educationid)
+      .then(res => (this.edu = res.data))
+      .catch(err => console.log(err.res.data));
+  },
+
   methods: {
-    fetchEducation() {
-      axios
-        .put("api/education", {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          }
-        })
-        .then(res => {
-          console.log(res);
-        })
-        .catch(error => console.log(error.response.data));
-    },
-    filterNames(v) {
-      this.loading = true;
-      setTimeout(() => {
-        this.items = this.edu.filter(e => {
-          return Object.keys(e).some(key => {
-            let string = String(e[key]);
-            return string.toLowerCase().indexOf((v || "").toLowerCase()) > -1;
-          });
-        });
-        this.loading = false;
-      }, 500);
-    },
     submit() {
       alert("You Clicked Submit");
     },
     clear() {
       alert("You Clicked Clear");
     },
-    initialize() {
-      this.filterNames();
-      this.fetchEducation();
-    }
+    initialize() {}
   }
 };
 </script>
